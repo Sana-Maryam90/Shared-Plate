@@ -1,19 +1,18 @@
 import Image from 'next/image'
+import Link from 'next/link';
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
       <div className="w-full flex flex-row justify-center items-center mt-5 xl:mt-9 font-sans">
-        <h4 className="font-lato text-base md:text-lg xl:text-xl font-semibold">
-          SHARED PLATE
-        </h4>
+        <h4 className="logo-primary">SHARED PLATE</h4>
       </div>
 
       <div className="absolute top-5 xl:top-8 right-5 xl:right-9 w-full flex flex-row justify-end items-center gap-5">
         <h4 className="hidden font-notoSans text-lg md:block xl:text-xl">
           Hi! Fatima Zehra
         </h4>
-        <button className="text-white bg-black border rounded-full font-notoSans text-base  md:text-xl xl:text-2xl h-7 w-7 md:h-8 md:w-8 md:mr-4 xl:h-10 xl:w-10 xl:mr-9 transition-colors hover:border-black hover:bg-green">
+        <button className="text-white bg-black rounded-full font-notoSans text-base  md:text-xl xl:text-2xl h-7 w-7 md:h-8 md:w-8 md:mr-4 xl:h-10 xl:w-10 xl:mr-9 transition-colors hover:bg-green duration-200">
           F
         </button>
       </div>
@@ -55,12 +54,12 @@ export default function Home() {
         </p>
 
         <div className="flex flex-row justify-center mt-2 gap-8 mx-4 xl:mt-4 xl:ml-9 xl:gap-16">
-          <button className="bg-black border h-10 w-28 xl:h-12 xl:w-32 text-white font-notoSans font-semibold text-lg xl:text-xl transition-colors hover:border-black hover:bg-green">
-            Give
-          </button>
-          <button className="bg-black border h-10 w-28 xl:h-12 xl:w-32 text-white font-notoSans font-semibold text-lg xl:text-xl transition-colors hover:border-black hover:bg-green">
-            Deliver
-          </button>
+          <Link href={"/login"}>
+            <button className="btn-primary">Give</button>
+          </Link>
+          <Link href={"/login"}>
+            <button className="btn-primary">Deliver</button>
+          </Link>
         </div>
 
         <Image
