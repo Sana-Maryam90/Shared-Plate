@@ -10,12 +10,17 @@ const Take = () => {
         {/*big screens*/}
         <div className='w-[70%]'>
             <GoogleMap/>
-            <div className=' bg-white text-black flex-row m-5 p-5'>
-                <div>Enter location here</div>
-                <div>Choose on map</div>
+            <div className=' bg-white text-black flex-row m-5 p-2'>
+                <div>
+                  <input 
+                    placeholder='Enter location here'
+                    className='bg-transparent w-full pt-2 pb-3 pl-2 text-xl border-none focus:outline-none font-semibold'
+                  />
+                  </div>
+                <div className='w-full pt-2 pb-3 pl-2 text-xl text-sky-500 font-semibold'>Choose on map</div>
             </div>
         </div>
-      <div className='flex-row bg-green w-[30%] justify-center gap-1'>
+      <div className='flex-row bg-green w-[30%] justify-center gap-1 items-center'>
             <Card/>
             <Card/>
             <Card/>
