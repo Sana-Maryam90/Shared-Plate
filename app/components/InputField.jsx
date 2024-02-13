@@ -29,6 +29,7 @@ export default function InputField({
         required={required}
         className={`mt-${mt} block w-full py-2 bg-transparent border-b-4 border-black font-notosans text-base shadow-sm placeholder-slate-400
                 focus:outline-none focus:border-green invalid:border-red invalid:text-red focus:invalid:border-red`}
+        style={{ WebkitBoxShadow: "0 0 0 30px #fffff3 inset" }}
       />
     </div>
   );

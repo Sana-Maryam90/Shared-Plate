@@ -1,9 +1,80 @@
+"use client";
 import InputField from "../components/InputField";
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import Toast from "../components/Toast";
+import axios from "axios";
 
 export default function SignUp() {
+
+  // States for setting form data
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+
+  const router = useRouter();
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Form Data Validation
+    if (!name || !email || !password || isChecked == false) {
+      toast.error("Please fill in all fields");
+    } else if (!email.includes("@") || !email.includes(".")) {
+      toast.error("Please enter a valid email address");
+    } else if (password.length < 6) {
+      toast.error("Password should be atleast 6 character long");
+    } else {
+
+      // Post Data using axios
+      const signUpData = {
+        email,
+        name,
+        password,
+      };
+      console.log("Sign Up Data: ", signUpData);
+      try {
+        const response = await axios({
+          url: "",
+          method: "POST",
+          data: signUpData,
+        });
+
+        console.log("Registration Successfull Response: ", response.message);
+        toast.success("Registration successful");
+        
+        // Navigate to login Page
+        setTimeout(() => {
+          router.push("/login");
+        }, 1000);
+
+        setName("");
+        setEmail("");
+        setPassword("");
+        
+      } catch (error) {
+        if (error.response) {
+          if (error.response.status === 409) {
+            toast.info("User with provided credentials already exists");
+          }
+          console.error("Response data:", error.response.data);
+        } else {
+          toast.error("Form submission failed!");
+          console.error("Error:", error.message);
+        }
+      }
+    }
+  };
   return (
     <main className="flex min-h-screen">
+      <Toast />
       {/* SignUp form with logo for all screens*/}
       <div className="w-full lg:w-1/2 bg-white flex flex-col items-center">
         <h4 className="logo-primary mt-5 lg:mt-9">SHARED PLATE</h4>
@@ -19,6 +90,8 @@ export default function SignUp() {
               label="Name"
               type="text"
               placeholder="John Doe"
+              value={name}
+              setter={setName}
               mt="2"
               mb="6"
             />
@@ -28,6 +101,8 @@ export default function SignUp() {
               label="Email"
               type="email"
               placeholder="johndoe@gmail.com"
+              value={email}
+              setter={setEmail}
               mt="2"
               mb="6"
             />
@@ -37,6 +112,8 @@ export default function SignUp() {
               label="Password"
               type="password"
               placeholder="********"
+              value={password}
+              setter={setPassword}
               mt="1"
               mb="6"
             />
@@ -45,6 +122,9 @@ export default function SignUp() {
               <input
                 type="checkbox"
                 id="acceptpolicy"
+                checked={isChecked}
+                onChange={handleCheckboxChange}
+                required
                 className="relative peer shrink-0 appearance-none w-4 h-4 border-2 border-black rounded-sm bg-white mt-1 checked:bg-black checked:border-0"
               />
               <label htmlFor="acceptpolicy" className="text-lg font-notosans">
@@ -56,15 +136,21 @@ export default function SignUp() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="white"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
             </div>
 
-            <button className="block m-auto btn-primary">Sign Up</button>
+            <button
+              className="block m-auto btn-primary"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              Sign Up
+            </button>
           </form>
 
           {/* Sign Up button for small screens*/}
