@@ -14,10 +14,12 @@ const Card = () => {
                 <button className="btn-primary">Accept</button>
             </Link>
             <Link href={"/reject"}>
-                <button className="btn-primary">Reject</button>
+                <button className="btn-primary hover:bg-red">Reject</button>
             </Link>
         </div>
     </div>
+
+    
   )
 }
 
