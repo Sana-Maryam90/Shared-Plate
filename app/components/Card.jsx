@@ -2,6 +2,8 @@ import React from 'react'
 import Link from 'next/link';
 import Image from 'next/image'
 
+
+//this is our card component
 const Card = () => {
   return (
     <div className=' bg-white text-black w-[90%] flex-row m-5 p-3 justify-center items-center'>
