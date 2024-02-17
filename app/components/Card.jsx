@@ -6,22 +6,20 @@ import Image from 'next/image'
 //this is our card component
 const Card = () => {
   return (
-    <div className=' bg-white text-black w-[90%] flex-row m-5 p-3 justify-center items-center'>
-        <div className='text-xl font-black'>Name</div>
-        <div className='text-lg font-bold'>Organization/Restaurant/Home-Based</div>
-        <div className='text-base font-semibold'>Address</div>
-        <div className='text-base font-semibold text-zinc-600'>Type of Food</div>
-        <div className="flex flex-row justify-center mt-2 gap-8 mx-4 xl:mt-4 xl:ml-9 xl:gap-16">
-            <Link href={"/accept"}>
-                <button className="btn-primary">Accept</button>
-            </Link>
-            <Link href={"/reject"}>
-                <button className="btn-primary hover:bg-red">Reject</button>
-            </Link>
-        </div>
+    <div className=' bg-white text-black w-[70%] flex-row m-5 p-3 justify-center items-center md:w-[80%] 2xl:w-[90%] xl:w-[90%] lg:w-[90%]'>
+      <div className='break-words font-black text-xl'>Name</div>
+      <div className='break-words font-bold text-lg'>Organization/Restaurant/Home-Based</div>
+      <div className='break-words font-semibold text-base'>Address</div>
+      <div className='break-words text-base font-semibold text-zinc-600'>Type of Food</div>
+      <div className="flex flex-col 2xl:flex-row xl:flex-row lg:flex-row md:flex-row justify-center items-center mt-2 gap-1 2xl:gap-8 mx-4 xl:mt-4 xl:ml-9 xl:gap-16">
+        <Link href={"/accept"}>
+          <button className="btn-primary">Accept</button>
+        </Link>
+        <Link href={"/reject"}>
+          <button className="btn-primary hover:bg-red">Reject</button>
+        </Link>
+      </div>
     </div>
-
-    
   )
 }
 
