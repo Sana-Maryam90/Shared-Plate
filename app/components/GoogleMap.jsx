@@ -1,7 +1,5 @@
-
-
 import React, { useEffect, useState } from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
 const googleMap = ({ requests }) => {
     const containerStyle = {
@@ -10,6 +8,7 @@ const googleMap = ({ requests }) => {
     };
 
     const [userLocation, setUserLocation] = useState(null);
+    const [selectedRequest, setSelectedRequest] = useState(null);
 
     useEffect(() => {
         // Fetch user's location
@@ -30,6 +29,14 @@ const googleMap = ({ requests }) => {
             }
         );
     }, []);
+
+    const handleMarkerClick = (request) => {
+        setSelectedRequest(request);
+    };
+
+    const handleInfoWindowClose = () => {
+        setSelectedRequest(null);
+    };
 
     return (
         <div>
@@ -52,11 +59,22 @@ const googleMap = ({ requests }) => {
                         />
 
                         {requests.map((request, index) => (
-                                <Marker
-                                    key={index}
-                                    position={{ lat: request.location.latitude, lng: request.location.longitude }}
-                                />
-                                ))}
+                            <Marker
+                                key={index}
+                                position={{ lat: request.location.latitude, lng: request.location.longitude }}
+                                onClick={() => handleMarkerClick(request)}
+                            >
+                                {selectedRequest === request && (
+                                    <InfoWindow onCloseClick={handleInfoWindowClose}>
+                                        <div>
+                                            <h3>{request.name}</h3>
+                                            <p>{request.foodtype}</p>
+                                            <a href={`https://www.google.com/maps?q=${request.location.latitude},${request.location.longitude}`} target="_blank" rel="noopener noreferrer">View on Google Maps</a>
+                                        </div>
+                                    </InfoWindow>
+                                )}
+                            </Marker>
+                        ))}
                     </GoogleMap>
                 )}
             </LoadScript>
@@ -65,3 +83,4 @@ const googleMap = ({ requests }) => {
 };
 
 export default googleMap;
+
