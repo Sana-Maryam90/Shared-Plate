@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
 
-const googleMap = () => {
+
+import React, { useEffect, useState } from 'react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+
+const googleMap = ({ requests }) => {
     const containerStyle = {
         width: '100%',
         height: '80vh',
@@ -40,6 +42,21 @@ const googleMap = () => {
                         center={userLocation}
                         zoom={15}
                     >
+                        {/* Marker for user's location */}
+                        <Marker
+                            position={userLocation}
+                            icon={{
+                                url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                                scaledSize: new window.google.maps.Size(30, 30),
+                            }}
+                        />
+
+                        {requests.map((request, index) => (
+                                <Marker
+                                    key={index}
+                                    position={{ lat: request.location.latitude, lng: request.location.longitude }}
+                                />
+                                ))}
                     </GoogleMap>
                 )}
             </LoadScript>
