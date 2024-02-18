@@ -14,7 +14,7 @@ export async function POST(request){
     // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return NextResponse.json({ status: 400, message: 'User already exists'});
+      return NextResponse.json({ message: 'User already exists'}, {status: 400});
     }
 
     // Hash the password
@@ -24,11 +24,11 @@ export async function POST(request){
     const newUser = new User({ name, email, password: hashedPassword });
     await newUser.save();
 
-    return NextResponse.json({ status: 201 , message: 'User created successfully' });
+    return NextResponse.json({ message: 'User created successfully' }, {status: 201});
 
 }catch (error) {
     console.error('Error creating user:', error);
-    return NextResponse.json({ status: 500, message: error.message });
+    return NextResponse.json({ message: error.message }, {status: 500});
   }
 
 }
