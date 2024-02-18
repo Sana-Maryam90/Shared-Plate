@@ -15,16 +15,16 @@ export async function POST(request){
         // Find user by email
         const user = await User.findOne({ email });
         if (!user) {
-        return NextResponse.json({ status: 401, message: 'Email not found' });
+        return NextResponse.json({ message: 'Email not found' }, {status: 401});
         }
 
         // Check password
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            return NextResponse.json({ status: 401, message: 'Invalid password' });
+            return NextResponse.json({ message: 'Invalid password' }, {status: 401});
         }
 
-        const Response = NextResponse.json({ status: 200, message: 'Login successful'});
+        const Response = NextResponse.json({ message: 'Login successful'}, {status: 200});
 
         // Create JWT token
         const token = jwt.sign({ userId: user._id, name: user.name }, process.env.JWT_SECRET, {
@@ -45,6 +45,6 @@ export async function POST(request){
         
     } catch (error) {
         console.error('Error logging in:', error);
-        return NextResponse.json({ status: 500, message: error.message });  
+        return NextResponse.json({ message: error.message }, {status: 500});  
     }
 }
