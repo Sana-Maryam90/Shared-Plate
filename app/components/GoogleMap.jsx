@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
-const googleMap = () => {
+const googleMap = ({ requests }) => {
     const containerStyle = {
         width: '100%',
         height: '80vh',
     };
 
     const [userLocation, setUserLocation] = useState(null);
+    const [selectedRequest, setSelectedRequest] = useState(null);
 
     useEffect(() => {
         // Fetch user's location
@@ -29,6 +30,14 @@ const googleMap = () => {
         );
     }, []);
 
+    const handleMarkerClick = (request) => {
+        setSelectedRequest(request);
+    };
+
+    const handleInfoWindowClose = () => {
+        setSelectedRequest(null);
+    };
+
     return (
         <div>
             <LoadScript 
@@ -40,6 +49,32 @@ const googleMap = () => {
                         center={userLocation}
                         zoom={15}
                     >
+                        {/* Marker for user's location */}
+                        <Marker
+                            position={userLocation}
+                            icon={{
+                                url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                                scaledSize: new window.google.maps.Size(30,30),
+                            }}
+                        />
+
+                        {requests.map((request, index) => (
+                            <Marker
+                                key={index}
+                                position={{ lat: request.location.latitude, lng: request.location.longitude }}
+                                onClick={() => handleMarkerClick(request)}
+                            >
+                                {selectedRequest === request && (
+                                    <InfoWindow onCloseClick={handleInfoWindowClose}>
+                                        <div>
+                                            <h3>{request.name}</h3>
+                                            <p>{request.foodtype}</p>
+                                            <a href={`https://www.google.com/maps?q=${request.location.latitude},${request.location.longitude}`} target="_blank" rel="noopener noreferrer">View on Google Maps</a>
+                                        </div>
+                                    </InfoWindow>
+                                )}
+                            </Marker>
+                        ))}
                     </GoogleMap>
                 )}
             </LoadScript>
@@ -48,3 +83,4 @@ const googleMap = () => {
 };
 
 export default googleMap;
+
