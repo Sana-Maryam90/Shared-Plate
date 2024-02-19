@@ -3,112 +3,121 @@ import InputField from "../components/InputField";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useUser } from "../hooks/UserContext";
 import axios from "axios";
 
 export default function GiveForm() {
+  // Getting userId from custom hook
+  const { user } = useUser();
+  const userId = user.userId;
+  console.log(userId);
 
-    const [formData, setFormData] = useState({
-      name: "",
-      givingOrg: "",
-      contact: "",
-      foodType: "",
-      foodServing: "",
-      availability: "",
-      landmark: "",
-      comments: "",
-      location: "",
-    });
+  const [formData, setFormData] = useState({
+    name: "",
+    givingOrg: "",
+    contact: "",
+    foodType: "",
+    foodServing: "",
+    availability: "",
+    landmark: "",
+    comments: "",
+    location: "",
+  });
 
-    const resetFormData = () => {
-        for (let key in formData) {
-            formData[key] = "";
-        }
-    }
-
-    const validContact = () => {
-      const regex = /^\d{11}$/;
-      return regex.test(formData.contact);
-    };
-
-    const validCurrentTime = () => {
-      // Get the current date and time
-      const currentDate = new Date();
-      const currentHours = currentDate.getHours();
-      const currentMinutes = currentDate.getMinutes();
-
-      // Parse the time string entered in the input field
-      const [hours, minutes] = formData.availability.split(":").map((num) => parseInt(num, 10));
-
-      // Compare the entered time with the current time
-      if (
-        hours > currentHours ||
-        (hours === currentHours && minutes > currentMinutes)
-      ) {
-        return true; // Entered time is after current time
+  const resetFormData = () => {
+      for (let key in formData) {
+          formData[key] = "";
       }
-      else return false; // Entered time is not after current time
-    };
+  }
 
-    const handleInputChange = (id, value) => {
-      setFormData({ ...formData, [id]: value });
-    };
+  const validContact = () => {
+    const regex = /^\d{11}$/;
+    return regex.test(formData.contact);
+  };
 
-    const router = useRouter();
+  const validCurrentTime = () => {
+    // Get the current date and time
+    const currentDate = new Date();
+    const currentHours = currentDate.getHours();
+    const currentMinutes = currentDate.getMinutes();
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
+    // Parse the time string entered in the input field
+    const [hours, minutes] = formData.availability.split(":").map((num) => parseInt(num, 10));
 
-      // Form Data Validation
-      if (
-        !formData.name ||
-        !formData.givingOrg ||
-        !formData.contact ||
-        !formData.foodType ||
-        !formData.foodServing ||
-        !formData.availability ||
-        !formData.landmark ||
-        !formData.comments ||
-        !formData.location
-      ) {
-        toast.error("Please fill in all fields");
-      } else if (!validContact()) {
-        toast.error("Please enter a valid contact number");
-      } else if (!validCurrentTime()) {
-        toast.error("Please enter a valid availabilty time");
-      } else {
-        // Post Data using axios
-        console.log("Give Form Data: ", formData);
-        try {
-          const response = await axios({
-            url: "https://c1e4f080-4188-4077-999c-95d499f9ca4b.mock.pstmn.io/post",
-            method: "POST",
-            data: formData,
-          });
+    // Compare the entered time with the current time
+    if (
+      hours > currentHours ||
+      (hours === currentHours && minutes > currentMinutes)
+    ) {
+      return true; // Entered time is after current time
+    }
+    else return false; // Entered time is not after current time
+  };
 
-          console.log("Registration Successfull Response: ", response.message);
-          toast.success("Registration successful");
+  const handleInputChange = (id, value) => {
+    setFormData({ ...formData, [id]: value });
+  };
 
-          // Navigate to login Page
-          setTimeout(() => {
-            router.push("/");
-          }, 1000);
+  const router = useRouter();
 
-          resetFormData();
-        } catch (error) {
-          if (error.response) {
-            toast.error("Invalid Details");
-            console.error(
-              "Request failed with status code",
-              error.response.status
-            );
-            console.error("Response data:", error.response.data);
-          } else {
-            toast.error("Form submission is failed");
-            console.error("Error during request setup:", error.message);
-          }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Form Data Validation
+    if (
+      !formData.name ||
+      !formData.givingOrg ||
+      !formData.contact ||
+      !formData.foodType ||
+      !formData.foodServing ||
+      !formData.availability ||
+      !formData.landmark ||
+      !formData.comments ||
+      !formData.location
+    ) {
+      toast.error("Please fill in all fields");
+    } else if (!validContact()) {
+      toast.error("Please enter a valid contact number");
+    } else if (!validCurrentTime()) {
+      toast.error("Please enter a valid availabilty time");
+    } else {
+      // Post Data using axios
+      const formDataWithUserId = {
+        ...formData,
+        userId: userId,
+      };
+      console.log("formDataWithUserId Data: ", formDataWithUserId);
+      try {
+        const response = await axios({
+          url: "",
+          method: "POST",
+          data: formDataWithUserId,
+        });
+
+        console.log("Registration Successfull Response: ", response.message);
+        toast.success("Registration successful");
+
+        // Navigate to login Page
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
+
+        resetFormData();
+      } catch (error) {
+        if (error.response) {
+          toast.error("Invalid Details");
+          console.error(
+            "Request failed with status code",
+            error.response.status
+          );
+          console.error("Response data:", error.response.data);
+        } else {
+          toast.error("Form submission is failed");
+          console.error("Error during request setup:", error.message);
         }
       }
     }
+  }
   return (
     <form className="w-3/4 md:w-1/2 lg:w-2/3 xl:w-1/2 my-5 md:my-10">
       <p className="font-notosans text-xl md:text-2xl font-semibold mb-2 lg:mb-4">

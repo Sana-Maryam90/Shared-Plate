@@ -31,19 +31,19 @@ export default function SignUpForm () {
     } else {
       // Post Data using axios
       const signUpData = {
-        email,
         name,
+        email,
         password,
       };
       console.log("Sign Up Data: ", signUpData);
       try {
         const response = await axios({
-          url: "",
+          url: "http://localhost:3000/api/signup",
           method: "POST",
           data: signUpData,
         });
 
-        console.log("Registration Successfull Response: ", response.message);
+        console.log("Registration Successfull Response: ", response.data);
         toast.success("Registration successful");
 
         // Navigate to login Page
