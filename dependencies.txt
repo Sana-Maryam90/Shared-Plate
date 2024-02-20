@@ -7,3 +7,6 @@ To install >> npm install --save react-toastify
 
 axios
 To install >> npm i axios
+
+sidebar for accounts
+To install >> npm i react-pro-sidebar
