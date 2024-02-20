@@ -8,7 +8,7 @@ import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/ap
 const googleMap = ({ requests, userLocation, onMarkerClick }) => {
     const containerStyle = {
         width: '100%',
-        height: '80vh',
+        height: '100vh',
     };
 
     const [selectedRequest, setSelectedRequest] = useState(null);

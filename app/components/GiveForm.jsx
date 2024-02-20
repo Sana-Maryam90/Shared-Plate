@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useUser } from "../hooks/UserContext";
+import Map from "./inputMap";
 import axios from "axios";
 
 export default function GiveForm() {
@@ -11,6 +12,22 @@ export default function GiveForm() {
   const { user } = useUser();
   const userId = user.userId;
   console.log(userId);
+
+  //new
+  const [selectedLocation, setSelectedLocation] = useState(null);
+
+  //new
+  const handleLocationSelect = (location) => {
+    setSelectedLocation(location);
+    setFormData({
+      ...formData,
+      location: {
+        latitude: location.lat,
+        longitude: location.lng
+      }
+    });
+  };
+
 
   const [formData, setFormData] = useState({
     name: "",
@@ -21,7 +38,7 @@ export default function GiveForm() {
     availability: "",
     landmark: "",
     comments: "",
-    location: "",
+    location: {latitude: 10, longitude: 10}, //new
   });
 
   const resetFormData = () => {
@@ -62,6 +79,7 @@ export default function GiveForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("formData: ", formData); // new
 
     // Form Data Validation
     if (
@@ -215,7 +233,7 @@ export default function GiveForm() {
         />
       </div>
       <div className="w-full lg:flex lg:items-center lg:gap-10">
-        <InputField
+        {/* <InputField
           id="location"
           label="Select Location"
           type="text"
@@ -224,8 +242,23 @@ export default function GiveForm() {
           setter={(value) => handleInputChange("location", value)}
           mt="8px"
           mb="32px"
+        /> */}
+
+        {/* new */}
+        <InputField
+          id="location"
+          label="Select Location"
+          type="text"
+          readOnly
+          placeholder="Select Location on Map"
+          value={(selectedLocation ? `${selectedLocation.lat}, ${selectedLocation.lng}` : "")}
+          // setter={(value) => handleInputChange("location", value)}
+          mt="8px"
+          mb="32px"
         />
       </div>
+      {/* new */}
+      <Map onLocationSelect={handleLocationSelect} /> 
       <button
         className="block m-auto btn-primary"
         type="submit"
