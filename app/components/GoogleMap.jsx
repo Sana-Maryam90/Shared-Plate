@@ -1,38 +1,24 @@
+"use client"
+
+
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
-const googleMap = ({ requests }) => {
+
+const googleMap = ({ requests, userLocation, onMarkerClick }) => {
     const containerStyle = {
         width: '100%',
         height: '80vh',
     };
 
-    const [userLocation, setUserLocation] = useState(null);
     const [selectedRequest, setSelectedRequest] = useState(null);
 
-    useEffect(() => {
-        // Fetch user's location
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                setUserLocation({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                });
-            },
-            error => {
-                console.error('Error getting user location:', error);
-                // Handle errors, fallback to default location
-                setUserLocation({
-                    lat: 24.8607,
-                    lng: 67.0011,
-                });
-            }
-        );
-    }, []);
-
+    
     const handleMarkerClick = (request) => {
         setSelectedRequest(request);
+        onMarkerClick(request.id); // Pass the id of the clicked marker to the parent component
     };
+
 
     const handleInfoWindowClose = () => {
         setSelectedRequest(null);
@@ -54,7 +40,7 @@ const googleMap = ({ requests }) => {
                             position={userLocation}
                             icon={{
                                 url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-                                scaledSize: new window.google.maps.Size(30,30),
+                                scaledSize: new window.google.maps.Size(30, 30),
                             }}
                         />
 
@@ -83,4 +69,6 @@ const googleMap = ({ requests }) => {
 };
 
 export default googleMap;
+
+
 
