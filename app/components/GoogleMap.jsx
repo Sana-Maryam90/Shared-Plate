@@ -16,7 +16,7 @@ const googleMap = ({ requests, userLocation, onMarkerClick }) => {
     
     const handleMarkerClick = (request) => {
         setSelectedRequest(request);
-        onMarkerClick(request.id); // Pass the id of the clicked marker to the parent component
+        onMarkerClick(request._id); // Pass the id of the clicked marker to the parent component
     };
 
 
