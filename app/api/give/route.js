@@ -5,6 +5,7 @@ import GiveRequest from "@/models/giveRequest";
 import { NextResponse } from "next/server";
 import User from "@/models/user";
 
+connectDb();
 export async function GET(request) {
     try {
         // Query the database for giveRequests with status "open"
