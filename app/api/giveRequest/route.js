@@ -7,15 +7,15 @@ export async function POST(request) {
     try {
         await connectDb();
 
-        // Extract the giveRequest ID from the request body
-        const { requestId } = await request.json();
+        // Extract the giveRequest ID from the request header
+        const requestId = await request.headers.get('requestId');
 
         // Query the database for the giveRequest with the specified ID
         const giveRequest = await GiveRequest.findById(requestId);
 
         // If the giveRequest is not found, return a 404 Not Found response
         if (!giveRequest) {
-            return NextResponse.json({ message: 'Give request not found' },{ status: 404});
+            return NextResponse.json({ message: 'Give request not found' }, { status: 404 });
         }
 
         // Filter out id and giverId fields from the giveRequest object
@@ -40,6 +40,7 @@ export async function POST(request) {
     } catch (error) {
         console.error('Error fetching give request:', error);
         // Handle errors and return appropriate response
-        return NextResponse.json({ message: error.message },{status: 500});
+        return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }
+
