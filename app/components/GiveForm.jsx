@@ -72,7 +72,6 @@ export default function GiveForm() {
       !formData.foodServing ||
       !formData.availability ||
       !formData.landmark ||
-      !formData.comments ||
       !formData.location
     ) {
       toast.error("Please fill in all fields");
@@ -94,10 +93,13 @@ export default function GiveForm() {
           data: formDataWithUserId,
         });
 
-        console.log("Registration Successfull Response: ", response.message);
-        toast.success("Registration successful");
+        console.log(
+          "Give Form successful submission Response: ",
+          response.data
+        );
+        toast.success("Request Successful");
 
-        // Navigate to login Page
+        // Navigate to Home Page
         setTimeout(() => {
           router.push("/");
         }, 1000);
