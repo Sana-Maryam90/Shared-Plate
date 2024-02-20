@@ -32,16 +32,16 @@ export default function LoginForm () {
         password,
         isRememberMe,
       };
-      console.log("Sign Up Data: ", loginData);
+      console.log("Login Data: ", loginData);
       try {
         const response = await axios({
-          url: "",
+          url: "http://localhost:3000/api/login",
           method: "POST",
           data: loginData,
         });
 
-        console.log("Registration Successfull Response: ", response.message);
-        toast.success("Registration successful");
+        console.log("Login Successfull Response: ", response.data);
+        toast.success("Login successful");
 
         // Navigate to login Page
         setTimeout(() => {
@@ -52,8 +52,12 @@ export default function LoginForm () {
         setPassword("");
         setRememberMe(false);
       } catch (error) {
-        if (error.response) {
-          toast.error("Invalid Credentials! User not registered");
+        if (error.response.status === 401) {
+          if (error.response.data.message === "Invalid password") {
+            toast.error("Invalid password");
+          } else {
+            toast.error("Invalid Credentials, User not registered");
+          }
           console.error(
             "Request failed with status code",
             error.response.status
