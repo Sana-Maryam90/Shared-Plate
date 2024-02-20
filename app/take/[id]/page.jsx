@@ -20,7 +20,7 @@ export default function TakeRequest({params}) {
       </h1>
       <div className="flex flex-col w-full lg:flex-row">
         <div className="w-full lg:w-3/5 flex flex-col items-center">
-          <GiveInfoCard />
+          <GiveInfoCard title={"Give Request Details"}/>
         </div>
         <div className="w-full lg:w-2/5 flex flex-col items-center">
           <TakeForm />

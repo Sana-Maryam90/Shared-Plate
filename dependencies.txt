@@ -10,3 +10,8 @@ To install >> npm i axios
 
 sidebar for accounts
 To install >> npm i react-pro-sidebar
+
+table to display all kinds of requests
+To install >> 
+npm install @mui/material @emotion/react @emotion/styled
+npm i @mui/x-data-grid
