@@ -162,6 +162,7 @@ const Take = () => {
                 name={request.name}
                 organization={request.organization}
                 type={request.foodtype}
+                id={request.id}
               />
             </div>
             ))}
