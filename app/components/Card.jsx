@@ -12,8 +12,8 @@ const Card = (props) => {
       <div className='break-words font-semibold text-base'>{props.address}</div>
       <div className='break-words text-base font-semibold text-zinc-600'>{props.type}</div>
       <div className="flex flex-col 2xl:flex-row xl:flex-row lg:flex-row md:flex-row justify-center items-center mt-2 gap-1 2xl:gap-8 mx-4 xl:mt-4 xl:ml-9 xl:gap-16">
-        <Link href={"/accept"}>
-          <button className="btn-primary">Accept</button>
+        <Link href={`/take/${props.id}`}>
+          <button className="btn-primary">Request</button>
         </Link>
         <Link href={"/reject"}>
           <button className="btn-primary hover:bg-red">Reject</button>
