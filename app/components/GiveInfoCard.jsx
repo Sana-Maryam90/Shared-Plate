@@ -48,7 +48,7 @@ const GiveCard = ({label, icon, data}) => {
       </div>
     );
 }
-export default function GiveInfoCard() {
+export default function GiveInfoCard({title}) {
   // Getting the Give Request ID, for which the user is sending a delivery request
   const giveRequestId = "";
 
@@ -79,7 +79,7 @@ export default function GiveInfoCard() {
   return (
     <div className="w-3/4 md:w-1/2 lg:w-10/12 my-5 md:my-10 ">
       <p className="font-notosans text-xl md:text-2xl lg:text-3xl font-semibold lg:font-bold mb-2 lg:mb-4">
-        Give Request Details
+        {title}
       </p>
 
       <div className="flex flex-col justify-center mt-4 lg:mt-0 bg-green/10 border border-black/25">
