@@ -2,6 +2,7 @@ import Toast from "../../components/Toast";
 import TakeForm from "../../components/TakeForm";
 import GiveInfoCard from "../../components/GiveInfoCard";
 
+
 async function getRequest(id) {
 
   
@@ -26,7 +27,6 @@ export default async function TakeRequest({params}) {
 
       <h4 className="logo-primary w-full text-center py-5 fixed bg-white">
         SHARED PLATE
-        {id}
       </h4>
 
       <h1 className="font-notosans text-3xl md:text-5xl font-bold text-center w-11/12 mt-16">
