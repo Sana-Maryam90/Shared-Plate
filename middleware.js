@@ -7,27 +7,27 @@ export function middleware(request) {
     const token = request.cookies.get('token')?.value;
     console.log(token);
 
-    // const loggedInUserNotAccessPaths = 
-    // request.nextUrl.pathname === "/login" ||
-    // request.nextUrl.pathname === "/signup";
+    const loggedInUserNotAccessPaths = 
+    request.nextUrl.pathname === "/login" ||
+    request.nextUrl.pathname === "/signup";
 
-    // if (loggedInUserNotAccessPaths){
-    //   // accessing not secured route
-    //   if(token){
-    //     return NextResponse.redirect(new URL('/account', request.url));
-    //   }
-    // }else{
-    //   // accessing secured route
-    //   // Perform authentication check based on the token
-    //   if(!token){
-    //     // Redirect the user to the login page if the token is missing
-    //     return NextResponse.redirect(new URL('/login', request.url));
-    //   }
-    // }
+    if (loggedInUserNotAccessPaths){
+      // accessing not secured route
+      if(token){
+        return NextResponse.redirect(new URL('/account', request.url));
+      }
+    }else{
+      // accessing secured route
+      // Perform authentication check based on the token
+      if(!token){
+        // Redirect the user to the login page if the token is missing
+        return NextResponse.redirect(new URL('/login', request.url));
+      }
+    }
 
 }
  
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/login','/signup','/take', '/account','/give','/api/:path*'],
+  matcher: ['/login','/signup','/take', '/account','/give',],
 }
