@@ -54,7 +54,8 @@ const googleMap = ({ requests, userLocation, onMarkerClick }) => {
                                     <InfoWindow onCloseClick={handleInfoWindowClose}>
                                         <div>
                                             <h3>{request.name}</h3>
-                                            <p>{request.foodtype}</p>
+                                            <p>{request.foodType}</p>
+                                            <p>Servings: {request.foodServing}</p>
                                             <a href={`https://www.google.com/maps?q=${request.location.latitude},${request.location.longitude}`} target="_blank" rel="noopener noreferrer">View on Google Maps</a>
                                         </div>
                                     </InfoWindow>
