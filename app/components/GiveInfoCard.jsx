@@ -11,17 +11,18 @@ import { IoInformationCircle } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
 import axios from "axios";
 
-const giveRequestData = {
-  name: "Fatima Zehra",
-  givingOrg: "Alkhidmat Welfare Foundation",
-  contact: "12345678901",
-  foodType: "Packaged Food",
-  foodServing: "4",
-  availability: "06:00:00",
-  landmark: "Aziz National School, Gulberg",
-  comments: "Food is Vegetarian ",
-  location: "ABC Street, Block 00, Gulshan-e-Iqbal, Karachi",
-};
+// const giveRequestData = {
+//   name: "Fatima Zehra",
+//   givingOrg: "Alkhidmat Welfare Foundation",
+//   contact: "12345678901",
+//   foodType: "Packaged Food",
+//   foodServing: "4",
+//   availability: "06:00:00",
+//   landmark: "Aziz National School, Gulberg",
+//   comments: "Food is Vegetarian ",
+//   location: "ABC Street, Block 00, Gulshan-e-Iqbal, Karachi",
+// };
+
 const GiveCard = ({label, icon, data}) => {
     return (
       //   <div className="flex flex-col bg-green/10 border border-black/25 rounded-sm mb-5 lg:mb-8  px-3 py-1 lg:w-1/2">
@@ -48,11 +49,13 @@ const GiveCard = ({label, icon, data}) => {
       </div>
     );
 }
-export default function GiveInfoCard({title}) {
+export default function GiveInfoCard({title, data}) {
   // Getting the Give Request ID, for which the user is sending a delivery request
-  const giveRequestId = "";
+  // const giveRequestId = '';
+  const giveRequestData = data.giveRequest;
 
-//   const [giveRequestData, setGiveRequestData] = useState([]);
+
+  //   const [giveRequestData, setGiveRequestData] = useState([]);
 
 //   useEffect(() => {
 //     const getData = async (giveRequestId) => {
@@ -138,7 +141,9 @@ export default function GiveInfoCard({title}) {
           <GiveCard
             label="Location"
             icon={<FaLocationDot />}
-            data={giveRequestData.location}
+            // data={giveRequestData.location}
+            // data={`Latitude: ${giveRequestData.location.latitude}, Longitude: ${giveRequestData.location.longitude}`}
+
           />
         </div>
       </div>
