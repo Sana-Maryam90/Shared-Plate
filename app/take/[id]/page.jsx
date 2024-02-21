@@ -2,9 +2,24 @@ import Toast from "../../components/Toast";
 import TakeForm from "../../components/TakeForm";
 import GiveInfoCard from "../../components/GiveInfoCard";
 
-export default function TakeRequest({params}) {
+async function getRequest(id) {
+
+  
+  const res = await fetch(`http://localhost:3000/api/giveRequest/${id}`, {
+    next: {
+      revalidate: 60
+    }
+  })
+
+  return res.json()
+}
+
+export default async function TakeRequest({params}) {
   const id = params.id;
-  console.log(id);
+  const request = await getRequest(id);
+
+  //Fetched Request
+  console.log(request);
   return (
     <main className="min-h-screen flex flex-col w-full items-center">
       <Toast />
@@ -20,7 +35,7 @@ export default function TakeRequest({params}) {
       </h1>
       <div className="flex flex-col w-full lg:flex-row">
         <div className="w-full lg:w-3/5 flex flex-col items-center">
-          <GiveInfoCard />
+          <GiveInfoCard title={"Give Request Details"} data={request}/>
         </div>
         <div className="w-full lg:w-2/5 flex flex-col items-center">
           <TakeForm />
