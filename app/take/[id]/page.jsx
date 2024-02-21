@@ -16,17 +16,16 @@ async function getRequest(id) {
 
 export default async function TakeRequest({params}) {
   const id = params.id;
-  const request = await getRequest(id);
+  // const request = await getRequest(id);
 
   //Fetched Request
-  console.log(request);
+  // console.log(request);
   return (
     <main className="min-h-screen flex flex-col w-full items-center">
       <Toast />
 
       <h4 className="logo-primary w-full text-center py-5 fixed bg-white">
         SHARED PLATE
-        {id}
       </h4>
 
       <h1 className="font-notosans text-3xl md:text-5xl font-bold text-center w-11/12 mt-16">
@@ -35,7 +34,7 @@ export default async function TakeRequest({params}) {
       </h1>
       <div className="flex flex-col w-full lg:flex-row">
         <div className="w-full lg:w-3/5 flex flex-col items-center">
-          <GiveInfoCard title={"Give Request Details"} data={request}/>
+          <GiveInfoCard title={"Give Request Details"} data={id}/>
         </div>
         <div className="w-full lg:w-2/5 flex flex-col items-center">
           <TakeForm />

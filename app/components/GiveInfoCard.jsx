@@ -52,32 +52,34 @@ const GiveCard = ({label, icon, data}) => {
 export default function GiveInfoCard({title, data}) {
   // Getting the Give Request ID, for which the user is sending a delivery request
   // const giveRequestId = '';
-  const giveRequestData = data.giveRequest;
+  // const giveRequestData = data.giveRequest;
+  const giveRequestId = data;
+  console.log(data);
+  console.log("giveRequestId", giveRequestId);
 
 
-  //   const [giveRequestData, setGiveRequestData] = useState([]);
+  const [giveRequestData, setGiveRequestData] = useState([]);
 
-//   useEffect(() => {
-//     const getData = async (giveRequestId) => {
-//       try {
-//         const response = await axios.get(
-//         //   `http://localhost:3000/api/${giveRequestId}`
-//         ""
-//         );
-//         if (response.data.result) {
-//           console.log("API Response:", response.data);
-//           const apiData = response.data.result;
-//           setGiveRequestData(apiData);
-//         } else {
-//           setGiveRequestData([]);
-//         }
-//       } catch (error) {
-//         console.error("Error fetching data:", error);
-//       }
-//     };
+  useEffect(() => {
+    const getData = async (giveRequestId) => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/giveRequest/${giveRequestId}`
+        );
+        if (response.data.result) {
+          console.log("API Response:", response.data);
+          const apiData = response.data.result;
+          setGiveRequestData(apiData);
+        } else {
+          setGiveRequestData([]);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-//     getData(giveRequestId);
-//   }, [giveRequestId]);
+    getData(giveRequestId);
+  }, [giveRequestId]);
 
   return (
     <div className="w-3/4 md:w-1/2 lg:w-10/12 my-5 md:my-10 ">

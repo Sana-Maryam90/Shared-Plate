@@ -38,7 +38,7 @@ export default function UserType() {
             <h4 className="hidden font-notoSans text-lg md:block xl:text-xl">
               Hi! {user.name}
             </h4>
-            <Link href={"/"}>
+            <Link href={"/account"}>
               <button className="text-white bg-black rounded-full font-notoSans text-base  md:text-xl xl:text-2xl h-7 w-7 md:h-8 md:w-8 md:mr-4 xl:h-10 xl:w-10 xl:mr-9 transition-colors hover:bg-green duration-200">
                 {user.name.charAt(0)}
               </button>
