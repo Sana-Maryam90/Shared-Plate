@@ -142,7 +142,7 @@ export default function GiveInfoCard({title, data}) {
             label="Location"
             icon={<FaLocationDot />}
             // data={giveRequestData.location}
-            // data={`Latitude: ${giveRequestData.location.latitude}, Longitude: ${giveRequestData.location.longitude}`}
+            data={`${giveRequestData.location.latitude}, ${giveRequestData.location.longitude}`}
 
           />
         </div>

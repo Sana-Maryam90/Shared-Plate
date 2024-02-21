@@ -252,7 +252,7 @@ export default function GiveForm() {
           readOnly
           placeholder="Select Location on Map"
           value={(selectedLocation ? `${selectedLocation.lat}, ${selectedLocation.lng}` : "")}
-          // setter={(value) => handleInputChange("location", value)}
+          setter={setSelectedLocation}
           mt="8px"
           mb="32px"
         />
