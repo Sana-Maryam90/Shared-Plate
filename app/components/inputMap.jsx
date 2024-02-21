@@ -1,17 +1,12 @@
 "use client"
 
-import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import { GoogleMap, Marker, useJsApiLoader, LoadScript } from "@react-google-maps/api";
 import { useState, useEffect } from "react";
 
 const containerStyle = {
   width: "100%",
   height: "400px",
 };
-
-// const center = {
-//   lat: -3.745,
-//   lng: -38.523,
-// };
 
 function Map({ onLocationSelect }) {
   const [userLocation, setUserLocation] = useState(null);
@@ -41,15 +36,9 @@ function Map({ onLocationSelect }) {
     getUserLocation();
   }, []);
 
-
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: 'AIzaSyBHaVsSMzCC1gB70fBC2fHqqWkFq6xP8X0', // Add your Google Maps API key here
-  });
-
-  // const onLoad = (map) => {
-  //   setMap(map);
-  // };
+  const onLoad = (map) => {
+    setMap(map);
+  };
 
   const onMarkerDragEnd = (event) => {
     const newPosition = {
@@ -61,22 +50,24 @@ function Map({ onLocationSelect }) {
     onLocationSelect(newPosition);
   };
 
-  return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={markerPosition}
-      zoom={15}
-      // onLoad={onLoad}
-    >
-      <Marker
-        position={markerPosition}
-        draggable={true} // Make the marker draggable
-        onDragEnd={onMarkerDragEnd} // Handle marker drag end event
-      />
-    </GoogleMap>
-  ) : (
-    <></>
-  );
+  return(
+    <LoadScript googleMapsApiKey="AIzaSyBHaVsSMzCC1gB70fBC2fHqqWkFq6xP8X0">
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={markerPosition}
+        zoom={15}
+        onLoad={setMap} // Use setMap directly as onLoad handler
+      >
+        {map && ( // Render Marker only when map is loaded
+          <Marker
+            position={markerPosition}
+            draggable={true}
+            onDragEnd={onMarkerDragEnd}
+          />
+        )}
+      </GoogleMap>
+    </LoadScript>
+  )
 }
 
 export default Map;
