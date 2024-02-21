@@ -8,7 +8,7 @@ import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/ap
 const googleMap = ({ requests, userLocation, onMarkerClick }) => {
     const containerStyle = {
         width: '100%',
-        height: '80vh',
+        height: '100vh',
     };
 
     const [selectedRequest, setSelectedRequest] = useState(null);
@@ -16,7 +16,7 @@ const googleMap = ({ requests, userLocation, onMarkerClick }) => {
     
     const handleMarkerClick = (request) => {
         setSelectedRequest(request);
-        onMarkerClick(request.id); // Pass the id of the clicked marker to the parent component
+        onMarkerClick(request._id); // Pass the id of the clicked marker to the parent component
     };
 
 
@@ -54,7 +54,8 @@ const googleMap = ({ requests, userLocation, onMarkerClick }) => {
                                     <InfoWindow onCloseClick={handleInfoWindowClose}>
                                         <div>
                                             <h3>{request.name}</h3>
-                                            <p>{request.foodtype}</p>
+                                            <p>{request.foodType}</p>
+                                            <p>Servings: {request.foodServing}</p>
                                             <a href={`https://www.google.com/maps?q=${request.location.latitude},${request.location.longitude}`} target="_blank" rel="noopener noreferrer">View on Google Maps</a>
                                         </div>
                                     </InfoWindow>
