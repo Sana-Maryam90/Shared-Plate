@@ -29,6 +29,7 @@ const googleMap = ({ requests, userLocation, onMarkerClick }) => {
             <LoadScript 
                 googleMapsApiKey="AIzaSyBHaVsSMzCC1gB70fBC2fHqqWkFq6xP8X0"
             >
+                {/* new */}
                 {userLocation && (
                     <GoogleMap
                         mapContainerStyle={containerStyle}
@@ -40,7 +41,7 @@ const googleMap = ({ requests, userLocation, onMarkerClick }) => {
                             position={userLocation}
                             icon={{
                                 url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-                                scaledSize: new window.google.maps.Size(30, 30),
+                                // scaledSize: new window.google.maps.Size(30, 30),
                             }}
                         />
 

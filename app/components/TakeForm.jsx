@@ -156,7 +156,7 @@ export default function TakeForm () {
           readOnly
           placeholder="Select Location on Map"
           value={(selectedLocation ? `${selectedLocation.latitude}, ${selectedLocation.longitude}` : "")}
-          // setter={(value) => handleInputChange("location", value)}
+          setter={setSelectedLocation}
           mt="8px"
           mb="32px"
       />

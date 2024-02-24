@@ -40,20 +40,24 @@ const Side = () => {
               color: 'green',
               backgroundColor: '#E7F5E3',
             },
-            [`.${'ps-menuitem-root'}`]: {
-              backgroundColor: '#E7F5E3',
-            },
             [`.${'ps-menu-root'}`]: {
-              backgroundColor: '#E7F5E3',
-            },
-            [`.${'ps-menu-icon'}`]: {
               backgroundColor: '#E7F5E3',
             },
             [`.${'ps-menu-button'}`]: {
               backgroundColor: '#E7F5E3',
             },
-
-            
+            [`.${'ps-menu-button:hover'}`]: {
+              backgroundColor: 'green',
+              color:'#E7F5E3'
+            },
+            [`.${'ps-menu-icon:hover'}`]: {
+              backgroundColor: 'green',
+              color:'#E7F5E3'
+            },
+            [`.${'ps-menu-label:hover'}`]: {
+              backgroundColor: 'green',
+              color:'#E7F5E3'
+            },
           }}
       >
         <Menu iconShape="square">
