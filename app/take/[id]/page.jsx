@@ -17,10 +17,10 @@ async function getRequest(id) {
 
 export default async function TakeRequest({params}) {
   const id = params.id;
-  // const request = await getRequest(id);
+  const request = await getRequest(id);
 
-  //Fetched Request
-  // console.log(request);
+  // Fetched Request
+  console.log(request);
   return (
     <main className="min-h-screen flex flex-col w-full items-center">
       <Toast />
@@ -35,10 +35,10 @@ export default async function TakeRequest({params}) {
       </h1>
       <div className="flex flex-col w-full lg:flex-row">
         <div className="w-full lg:w-3/5 flex flex-col items-center">
-          <GiveInfoCard title={"Give Request Details"} data={id}/>
+          <GiveInfoCard title={"Give Request Details"} data={request} />
         </div>
         <div className="w-full lg:w-2/5 flex flex-col items-center">
-          <TakeForm />
+          <TakeForm requestId={id} />
         </div>
       </div>
       {/* <div>
