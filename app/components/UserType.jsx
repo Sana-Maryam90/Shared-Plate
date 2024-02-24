@@ -49,7 +49,7 @@ export default function UserType() {
               <button className="btn-primary">Give</button>
             </Link>
             <Link href={"/take"}>
-              <button className="btn-primary">Deliver</button>
+              <button className="btn-primary">Take</button>
             </Link>
           </div>
         </>
@@ -59,7 +59,7 @@ export default function UserType() {
             <button className="btn-primary">Give</button>
           </Link>
           <Link href={"/login"}>
-            <button className="btn-primary">Deliver</button>
+            <button className="btn-primary">Take</button>
           </Link>
         </div>
       )}

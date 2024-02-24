@@ -260,7 +260,7 @@ export default function GiveForm() {
       {/* new */}
       <Map onLocationSelect={handleLocationSelect} /> 
       <button
-        className="block m-auto btn-primary"
+        className="block m-auto my-9 btn-primary"
         type="submit"
         onClick={handleSubmit}
       >
