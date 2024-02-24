@@ -7,11 +7,10 @@ import { useUser } from "../hooks/UserContext";
 import axios from "axios";
 import Map from "./inputMap";
 
-export default function TakeForm () {
+export default function TakeForm({ requestId }) {
   // Getting the authenticated userID
   const { user } = useUser();
   const userId = user.userId;
-
 
   //new
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -20,11 +19,9 @@ export default function TakeForm () {
   const handleLocationSelect = (location) => {
     setSelectedLocation({
       latitude: location.lat,
-      longitude: location.lng
+      longitude: location.lng,
     });
   };
-
-
 
   // Getting the Give Request ID, for which the user is sending a delivery request
   const giveRequestId = "";
@@ -59,12 +56,12 @@ export default function TakeForm () {
         comments,
         location: selectedLocation,
         userId,
-        giveRequestId,
+        requestId,
       };
       console.log("Take Form Data: ", takeFormData);
       try {
         const response = await axios({
-          url: "",
+          url: "http://localhost:3000/api/take",
           method: "POST",
           data: takeFormData,
         });
@@ -150,19 +147,23 @@ export default function TakeForm () {
       /> */}
 
       <InputField
-          id="location"
-          label="Select Location"
-          type="text"
-          readOnly
-          placeholder="Select Location on Map"
-          value={(selectedLocation ? `${selectedLocation.latitude}, ${selectedLocation.longitude}` : "")}
-          setter={setSelectedLocation}
-          mt="8px"
-          mb="32px"
+        id="location"
+        label="Select Location"
+        type="text"
+        readOnly
+        placeholder="Select Location on Map"
+        value={
+          selectedLocation
+            ? `${selectedLocation.latitude}, ${selectedLocation.longitude}`
+            : ""
+        }
+        setter={setSelectedLocation}
+        mt="8px"
+        mb="32px"
       />
-      <Map onLocationSelect={handleLocationSelect} /> 
+      <Map onLocationSelect={handleLocationSelect} />
       <button
-        className="block m-auto btn-primary"
+        className="block m-auto my-9 btn-primary"
         type="submit"
         onClick={handleSubmit}
       >

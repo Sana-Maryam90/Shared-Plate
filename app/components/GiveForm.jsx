@@ -106,7 +106,7 @@ export default function GiveForm() {
       console.log("formDataWithUserId Data: ", formDataWithUserId);
       try {
         const response = await axios({
-          url: "",
+          url: "http://localhost:3000/api/give",
           method: "POST",
           data: formDataWithUserId,
         });
@@ -260,7 +260,7 @@ export default function GiveForm() {
       {/* new */}
       <Map onLocationSelect={handleLocationSelect} /> 
       <button
-        className="block m-auto btn-primary"
+        className="block m-auto my-9 btn-primary"
         type="submit"
         onClick={handleSubmit}
       >

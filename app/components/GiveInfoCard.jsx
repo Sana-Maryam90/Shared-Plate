@@ -11,18 +11,6 @@ import { IoInformationCircle } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
 import axios from "axios";
 
-// const giveRequestData = {
-//   name: "Fatima Zehra",
-//   givingOrg: "Alkhidmat Welfare Foundation",
-//   contact: "12345678901",
-//   foodType: "Packaged Food",
-//   foodServing: "4",
-//   availability: "06:00:00",
-//   landmark: "Aziz National School, Gulberg",
-//   comments: "Food is Vegetarian ",
-//   location: "ABC Street, Block 00, Gulshan-e-Iqbal, Karachi",
-// };
-
 const GiveCard = ({label, icon, data}) => {
     return (
       //   <div className="flex flex-col bg-green/10 border border-black/25 rounded-sm mb-5 lg:mb-8  px-3 py-1 lg:w-1/2">
@@ -51,33 +39,34 @@ const GiveCard = ({label, icon, data}) => {
 }
 export default function GiveInfoCard({title, data}) {
   // Getting the Give Request ID, for which the user is sending a delivery request
-  // const giveRequestId = '';
   const giveRequestData = data.giveRequest;
+  // const giveRequestId = data;
+  // console.log(data);
+  console.log("Give Request Data", giveRequestData);
 
 
-  //   const [giveRequestData, setGiveRequestData] = useState([]);
+  // const [giveRequestData, setGiveRequestData] = useState([]);
 
-//   useEffect(() => {
-//     const getData = async (giveRequestId) => {
-//       try {
-//         const response = await axios.get(
-//         //   `http://localhost:3000/api/${giveRequestId}`
-//         ""
-//         );
-//         if (response.data.result) {
-//           console.log("API Response:", response.data);
-//           const apiData = response.data.result;
-//           setGiveRequestData(apiData);
-//         } else {
-//           setGiveRequestData([]);
-//         }
-//       } catch (error) {
-//         console.error("Error fetching data:", error);
-//       }
-//     };
+  // useEffect(() => {
+  //   const getData = async (giveRequestId) => {
+  //     try {
+  //       const response = await axios.get(
+  //         `http://localhost:3000/api/giveRequest/${giveRequestId}`
+  //       );
+  //       if (response.data.result) {
+  //         console.log("API Response:", response.data);
+  //         const apiData = response.data.result;
+  //         setGiveRequestData(apiData);
+  //       } else {
+  //         setGiveRequestData([]);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-//     getData(giveRequestId);
-//   }, [giveRequestId]);
+  //   getData(giveRequestId);
+  // }, [giveRequestId]);
 
   return (
     <div className="w-3/4 md:w-1/2 lg:w-10/12 my-5 md:my-10 ">
@@ -137,14 +126,27 @@ export default function GiveInfoCard({title, data}) {
             data={giveRequestData.comments}
           />
         </div>
-        <div className="lg:pr-28">
+        {/* <div className="lg:pr-28">
           <GiveCard
             label="Location"
             icon={<FaLocationDot />}
             // data={giveRequestData.location}
             data={`${giveRequestData.location.latitude}, ${giveRequestData.location.longitude}`}
-
           />
+        </div> */}
+        <div className="lg:pr-28">
+          <div className="flex flex-col mb-5 lg:mb-8  mx-3 py-1 lg:w-1/2 border-b-[3px] border-black">
+            <div className="flex justify-between items-center">
+              <h1 className="font-notosans text-lg font-bold text-black/80">
+                Location
+              </h1>
+              <FaLocationDot className="text-lg" />
+            </div>
+            <p className="font-notosans text-lg flex flex-col">
+              <span>Latitude:&nbsp; {giveRequestData.location.latitude}</span>
+              <span>Longitude:&nbsp; {giveRequestData.location.longitude}</span>
+            </p>
+          </div>
         </div>
       </div>
     </div>

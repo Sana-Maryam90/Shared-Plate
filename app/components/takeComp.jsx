@@ -87,12 +87,12 @@ const TakeComp = ({ fetchedData }) => {
         <GoogleMap requests={filteredRequests} userLocation={userLocation} onMarkerClick={handleMarkerClick}/>
       </div>
 
-      <div className='flex flex-col bg-green items-center w-[100%] md:w-[40%] 2xl:w-[30%] xl:w-[30%] lg:w-[30%] overflow-y-auto'>
+      <div className='flex flex-col bg-white items-center w-[100%] md:w-[40%] 2xl:w-[30%] xl:w-[30%] lg:w-[30%] overflow-y-auto'>
       {loading ? (
           <div>Loading...</div>
         ) : (
           filteredRequests.map(request => (
-            <div key={request._id} ref={(el) => (cardRefs.current[request._id] = el)}>
+            <div key={request._id} ref={(el) => (cardRefs.current[request._id] = el)} className='w-full flex justify-center items-center'>
               <Card
                 key={request._id}
                 name={request.name}
