@@ -48,7 +48,7 @@ export default function GiveForm() {
   }
 
   const validContact = () => {
-    const regex = /^\d{11}$/;
+    const regex = /^\d{10}$/;
     return regex.test(formData.contact);
   };
 
@@ -69,6 +69,22 @@ export default function GiveForm() {
       return true; // Entered time is after current time
     }
     else return false; // Entered time is not after current time
+  };
+
+  const formattedTime = (value) => {
+    // Parse the input value to create a Date object
+    const dateObject = new Date(value);
+
+    // Get the year, month, day, hour, and minute components
+    const year = dateObject.getFullYear();
+    const month = String(dateObject.getMonth() + 1).padStart(2, "0"); // Adding 1 to month index as it starts from 0
+    const day = String(dateObject.getDate()).padStart(2, "0");
+    const hour = String(dateObject.getHours()).padStart(2, "0");
+    const minute = String(dateObject.getMinutes()).padStart(2, "0");
+
+    // Format the date components in the desired format (YYYY-MM-DDTHH:mm:ss)
+    const formattedDate = `${year}-${month}-${day}T${hour}:${minute}:00`;
+    return formattedDate;
   };
 
   const handleInputChange = (id, value) => {
@@ -202,10 +218,10 @@ export default function GiveForm() {
         <InputField
           id="availability"
           label="Availabile Uptil"
-          type="time"
+          type="datetime-local"
           placeholder="Food is available uptil this time from now"
           value={formData.availability}
-          setter={(value) => handleInputChange("availability", value)}
+          setter={(value) => handleInputChange("availability", formattedTime(value))}
           mt="8px"
           mb="32px"
         />
@@ -251,14 +267,18 @@ export default function GiveForm() {
           type="text"
           readOnly
           placeholder="Select Location on Map"
-          value={(selectedLocation ? `${selectedLocation.lat}, ${selectedLocation.lng}` : "")}
+          value={
+            selectedLocation
+              ? `${selectedLocation.lat}, ${selectedLocation.lng}`
+              : ""
+          }
           setter={setSelectedLocation}
           mt="8px"
           mb="32px"
         />
       </div>
       {/* new */}
-      <Map onLocationSelect={handleLocationSelect} /> 
+      <Map onLocationSelect={handleLocationSelect} />
       <button
         className="block m-auto my-9 btn-primary"
         type="submit"
