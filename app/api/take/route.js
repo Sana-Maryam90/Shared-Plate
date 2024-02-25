@@ -74,7 +74,7 @@ export async function POST(request) {
                         <li style="margin-bottom: 5px; color: #666666;"><strong>Comment:</strong> ${comment}</li>
                         <li style="margin-bottom: 5px; color: #666666;"><strong>Location:</strong> <a href="${mapLink}" style="color: #007bff; text-decoration: none;">View Location on Map</a></li>
                     </ul>
-                    <a href="http://localhost:3000/account">View Request on App</a>
+                    <button>Accept Request</button>
 
                 </div>
                 <p style="color: #666666;">Thank you for your generosity.</p>
