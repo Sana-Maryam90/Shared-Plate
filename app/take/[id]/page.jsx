@@ -15,7 +15,11 @@ async function getRequest(id) {
   return res.json()
 }
 
+
+
 export default async function TakeRequest({params}) {
+
+
   const id = params.id;
   const request = await getRequest(id);
 
