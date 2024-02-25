@@ -28,7 +28,7 @@ const Side = () => {
     // Getting the authenticated userName from useUser hook
     const { user } = useUser();
     const userName = user.name;
-
+    const firstName = String(userName).split(' ')[0]
   return (
  
       <Sidebar
@@ -59,7 +59,7 @@ const Side = () => {
               backgroundColor:"green"
             },
             [`.${'& .ps-active'}`]: {
-               color: "#6870fa",
+              color: 'green',
             },
           }}
       >
@@ -75,7 +75,7 @@ const Side = () => {
               <div className='flex justify-center items-center '>
 
                 <button onClick={() => setCollapsed(!collapsed)}>
-                    <h3 className='font-notosans text-black text-2xl md:text-3xl font-bold text-center'>Hi! {userName}</h3>
+                    <h3 className='font-notosans text-black text-2xl md:text-3xl font-bold text-center'>Hi! {firstName}</h3>
                 </button>
               </div>
             )}

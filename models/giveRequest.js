@@ -16,6 +16,10 @@ const giveRequestSchema = new Schema({
     },
     status: { type: String, enum: ['open', 'closed'], default: 'open' },
     createdAt: { type: Date, default: Date.now },
+    requestedBy: {
+        type: [mongoose.Schema.Types.ObjectId],
+        default: []
+    },
     closedAt: { type: Date },
     volunteerId: { type: mongoose.Schema.Types.ObjectId, ref: 'taker' }
 });

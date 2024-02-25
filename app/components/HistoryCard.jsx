@@ -1,3 +1,4 @@
+"use client"
 import React,{useState,useEffect} from 'react'
 import { FaHourglassHalf } from "react-icons/fa"
 import { FaHandshakeAngle } from "react-icons/fa6"
