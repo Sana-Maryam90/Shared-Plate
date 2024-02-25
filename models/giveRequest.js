@@ -7,7 +7,7 @@ const giveRequestSchema = new Schema({
     contact: { type: String, required: true },
     foodType: { type: String, required: true },
     foodServing: { type: Number, required: true },
-    availability: { type: String, required: true },
+    availability: { type: Date, required: true },
     landmark: { type: String },
     comments: { type: String },
     location: {
