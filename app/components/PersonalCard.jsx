@@ -4,24 +4,18 @@ import { MdEmail } from "react-icons/md"
 import { useUser } from "../hooks/UserContext";
 import axios from 'axios'
 
-/*
-const giveRequestData = {
-  name: "Fatima Zehra",
-  givingOrg: "Alkhidmat Welfare Foundation",
-  contact: "12345678901",
-};
-*/
-
-const GiveCard = ({label, icon, data}) => {
+export const GiveCard = ({label, icon, data}) => {
     return (
-        <div className="flex flex-col mb-5 lg:mb-8  mx-3 py-1 lg:w-1/2 ">
-        <div className="flex justify-center items-center gap-6">
-          {icon && <div className="text-lg m-1">{React.cloneElement(icon)}</div>}
-          <h1 className="font-notosans text-lg font-bold text-black/80 mb-1">
+      <div className="flex flex-col mx-3 py-2 lg:w-1/2 ">
+        <div className="flex justify-start items-center gap-16 mb-2">
+          <h1 className="font-notosans text-lg font-bold text-black/80">
             {label}
           </h1>
+          {icon && (
+            <div className="text-lg">{React.cloneElement(icon)}</div>
+          )}
         </div>
-        <p className="font-notosans text-lg text-center">{data}</p>
+        <p className="font-notosans text-lg text-left">{data}</p>
       </div>
     );
 }
@@ -52,30 +46,44 @@ const PersonalCard = () => {
 
 
   return (
-    
-    <div className='w-[95%] md:w-[80%] lg:w-[40%]'>
-      <div className="w-[100%] md:w-[100%] lg:w-[100%] my-5 md:my-10 ">
-        <div className="w-[100%] flex flex-row justify-center mt-4 lg:mt-0 bg-green/10 border border-black/25">
+
+      <div className="flex flex-col w-full bg-green/10 border border-black/25 rounded-sm p-2 lg:w-3/5 md:w-3/4">
+        {personalData && (
+          <div className="flex w-full gap-8">
+            <GiveCard
+              label="Full Name"
+              icon={<IoPerson />}
+              data={personalData.name}
+            />
+            <GiveCard
+              label="Email Information"
+              icon={<MdEmail />}
+              data={personalData.email}
+            />
+          </div>
+        )}
+      {/* <div className="w-[100%] md:w-[100%] lg:w-[100%] mt-2 mb-5 lg:mt-6 lg:mb-8">
+        <div className=" justify-start flex w-full bg-green/10 border border-black/25 rounded-sm mb-5 lg:mb-8 p-2 lg:w-1/3 lg:mr-14 md:w-3/5">
           <div className="w-[100%] mt-3 flex flex-col lg:mt-5 lg:flex lg:items-center lg:gap-1">
-          {personalData && (
-            <>
-              <GiveCard
-                label="Full Name"
-                icon={<IoPerson/>}
-                data={personalData.name}
-              />
-              <GiveCard
-                label="Email Information"
-                icon={<MdEmail/>}
-                data={personalData.email}
-              />
-            </>
-          )}
+            {personalData && (
+              <div className="flex">
+                <GiveCard
+                  label="Full Name"
+                  icon={<IoPerson />}
+                  data={personalData.name}
+                />
+                <GiveCard
+                  label="Email Information"
+                  icon={<MdEmail />}
+                  data={personalData.email}
+                />
+              </div>
+            )}
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
-  )
+  );
 }
 
   
