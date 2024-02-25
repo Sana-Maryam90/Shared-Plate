@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { FaHourglassHalf } from "react-icons/fa"
 import { FaHandshakeAngle } from "react-icons/fa6"
 import { FaMotorcycle } from "react-icons/fa6"
+import { useUser } from "../hooks/UserContext"
+import axios from 'axios'
 
 const giveRequestData = {
     "giverCount":1,
@@ -24,6 +26,23 @@ const GiveCard = ({label, icon, data}) => {
 }
 
 const HistoryCard = ({title}) => {
+  // Getting the authenticated userID
+  const { user } = useUser();
+  const userId = user.userId;
+  const [historicalData, setHistoricalData] = useState([]);
+
+  useEffect(()=>{
+    const fetchData=async()=>{
+      try{
+        const response = await axios.get(`http://localhost:3000/api/profile/${userId}`);
+        setHistoricalData(response.data.result);
+      }catch(error){
+        console.error('Error fetching data:', error);
+      }
+    }
+    fetchData();
+  },[userId])
+
   return (
     <div className='w-[95%] md:w-[80%] lg:w-[40%]'>
       <div className="w-[100%] md:w-[100%] lg:w-[100%] my-5 md:my-10 ">
@@ -33,22 +52,26 @@ const HistoryCard = ({title}) => {
   
         <div className="w-[100%] flex flex-row justify-center mt-4 lg:mt-0 bg-green/10 border border-black/25">
           <div className="w-[100%] mt-3 flex flex-col lg:mt-5 lg:flex lg:items-center lg:gap-1">
+            {historicalData && (
+            <>
+            
             <GiveCard
               label="No of ongoing requests"
               icon={<FaHourglassHalf/>}
-              data={giveRequestData.ongoingRequests}
+              data={historicalData.ongoingRequests}
             />
             <GiveCard
               label="No of times food given"
               icon={<FaHandshakeAngle/>}
-              data={giveRequestData.giverCount}
+              data={historicalData.giverCount}
             />
             <GiveCard
               label="No of times food taken"
               icon={<FaMotorcycle />}
-              data={giveRequestData.takerCount}
+              data={historicalData.takerCount}
             />
-
+            </>
+          )}
           </div>
         </div>
       </div>
