@@ -1,14 +1,14 @@
-const { connectDb } = require("@/helper/db");
+import { connectDb } from '@/helper/db';
 import { NextResponse } from "next/server";
 import User from "@/models/user";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 
-connectDb();
 
 export async function POST(request){
     try {
+        await connectDb();
         // extracting data from request
         const { email, password, isRememberMe } = await request.json();
 

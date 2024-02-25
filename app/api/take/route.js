@@ -10,7 +10,7 @@ export async function POST(request) {
         await connectDb();
 
         // Extract the data from the request body
-        const { userId, requestId, name, contact, location } = await request.json();
+        const { userId, requestId, name, contact, comment, location } = await request.json();
 
         // Find the give request by requestId to get the giverId
         const giveRequest = await GiveRequest.findById(requestId);
@@ -37,12 +37,13 @@ export async function POST(request) {
 
         // If the user already exists in the taker collection, update the contact and location
         if (existingTaker) {
+            existingTaker.comment = comment;
             existingTaker.contact = contact;
             existingTaker.location = location;
             await existingTaker.save();
         } else {
             // If the user does not exist, create a new taker
-            existingTaker = await Taker.create({ userId, name, contact, location });
+            existingTaker = await Taker.create({ userId, name, contact, comment, location });
         }
 
         // Construct Google Maps link using latitude and longitude
@@ -53,7 +54,7 @@ export async function POST(request) {
             from: process.env.EMAIL, // Sender email address
             to: giverEmail, // Receiver email address (giver's email)
             subject: 'New Take Request', // Email subject
-            text: `A new user wants to take on your give request. User details: Name - ${name}, Contact - ${contact}, Location - ${location}`, // Plain text body
+            text: `A new user wants to take on your give request. User details: Name - ${name}, Contact - ${contact}, Comment - ${comment}, Location - ${location}`, // Plain text body
             // HTML body can be added if needed
             html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e0e0e0;">
@@ -66,8 +67,10 @@ export async function POST(request) {
                     <ul style="list-style: none; padding: 0; margin: 0;">
                         <li style="margin-bottom: 5px; color: #666666;"><strong>Name:</strong> ${name}</li>
                         <li style="margin-bottom: 5px; color: #666666;"><strong>Contact:</strong> ${contact}</li>
+                        <li style="margin-bottom: 5px; color: #666666;"><strong>Comment:</strong> ${comment}</li>
                         <li style="margin-bottom: 5px; color: #666666;"><strong>Location:</strong> <a href="${mapLink}" style="color: #007bff; text-decoration: none;">View Location on Map</a></li>
                     </ul>
+                    <button id="acceptRequestButton">Accept Request</button>
                 </div>
                 <p style="color: #666666;">Thank you for your generosity.</p>
                 <p style="color: #666666;">Best regards,<br><strong>Team SharedPlate</strong></p>

@@ -141,7 +141,22 @@ async function getRequests(){
     return res.json();
 }
 
+
+async function deleteOverdueGiveRequests() {
+    try {
+        const response = await fetch('http://localhost:3000/api/deleteRequest', {
+            method: 'POST',
+        });
+        const data = await response.json();
+        console.log(data); // Log the response from the server
+    } catch (error) {
+        console.error('Error deleting overdue giveRequests:', error);
+    }
+  }
+
 export default async function Take(){
+    await deleteOverdueGiveRequests();
+
     const requests = await getRequests();
     return ( 
         <>
