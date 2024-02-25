@@ -8,8 +8,31 @@ import axios from "axios";
 import Map from "./inputMap";
 
 export default function TakeForm({ requestId }) {
-  // Getting the authenticated userID
-  const { user } = useUser();
+  const { user, setUser } = useUser();
+
+  // Get the current user data from the backend API
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      try {
+        const response = await axios({
+          url: "http://localhost:3000/api/currentUser",
+          method: "GET",
+        });
+        console.log("Successfully get user: ", response.data);
+        setUser(response.data);
+      } catch (error) {
+        if (error.response.status === 401) {
+          setUser(error.response.data);
+          console.log("401 Response: ", error.response.data);
+        } else
+          console.error("Error fetching current user:", error.response.data);
+      }
+    };
+
+    getCurrentUser();
+  }, []);
+  console.log("User Hook Data: ", user);
+  
   const userId = user.userId;
 
   //new
@@ -34,7 +57,7 @@ export default function TakeForm({ requestId }) {
 
   // To check the validity of contact
   const validContact = () => {
-    const regex = /^\d{11}$/;
+    const regex = /^\d{10}$/;
     return regex.test(contact);
   };
 
