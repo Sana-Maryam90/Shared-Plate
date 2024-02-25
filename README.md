@@ -51,5 +51,5 @@ We welcome any feedback or suggestions for improving Shared Plate. Feel free to 
 
 ## Additional Information
 
-For more information about Shared Plate, including project updates, documentation, and community guidelines, please check out the [GitHub repository](https://github.com/your_username/shared-plate).
+For more information about Shared Plate, including project updates, documentation, and community guidelines, please check out the [GitHub repository](https://github.com/Sana-Maryam90/Shared-Plate).
 
