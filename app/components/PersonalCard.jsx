@@ -1,8 +1,7 @@
 import React,{useState,useEffect} from 'react'
-import { FaHourglassHalf } from "react-icons/fa"
+import { IoPerson } from "react-icons/io5";
 import { MdEmail } from "react-icons/md"
-
-import { useUser } from "../hooks/UserContext"
+import { useUser } from "../hooks/UserContext";
 import axios from 'axios'
 
 /*
@@ -35,21 +34,19 @@ const PersonalCard = () => {
 
   useEffect(()=>{
     
-    //console.log('Fetching data for user:', userId);
-    const fetchData = async()=>{
-      try{
-        const response = await axios({
-          url: `http://localhost:3000/api/user/${userId}`,
-          method: "GET",
-        });
+    console.log('Fetching data for user:', userId);
+    const fetchData = async (userId) => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/user/${userId}`);
         //const response = await axios.get(`http://localhost:3000/api/user/${userId}`);
-        console.log('Response data:', response.data);
-        setPersonalData(response.data);
-      }catch(error){
-        console.error('Error fetching data:', error);
+        console.log("Response data:", response.data);
+        const apiData = response.data;
+        setPersonalData(apiData.userInfo);
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
-    }
-    fetchData();
+    };
+    fetchData(userId);
     
   },[userId])
 
@@ -64,7 +61,7 @@ const PersonalCard = () => {
             <>
               <GiveCard
                 label="Full Name"
-                icon={<FaHourglassHalf/>}
+                icon={<IoPerson/>}
                 data={personalData.name}
               />
               <GiveCard

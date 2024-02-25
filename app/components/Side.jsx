@@ -1,6 +1,6 @@
 "use client"
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import React, { useState,useEffect } from 'react'
+import React, { useState } from 'react'
 import { IoPerson } from "react-icons/io5"
 import { IoMenuSharp } from "react-icons/io5"
 import { FaHourglassHalf } from "react-icons/fa"
@@ -9,7 +9,6 @@ import { FaMotorcycle } from "react-icons/fa6"
 import { PiPackageFill } from "react-icons/pi"
 import { BiLogOut } from "react-icons/bi";
 import { useUser } from "../hooks/UserContext"
-import axios from 'axios'
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
     return (
@@ -26,24 +25,9 @@ const Side = () => {
     const [collapsed,setCollapsed]=useState(false)
     const [selected, setSelected] = useState("Personal Information");
 
-        // Getting the authenticated userID
-  const { user } = useUser();
-  const userId = user.userId;
-  const [userName, setUserName] = useState([]);
-
-  useEffect(()=>{
-    //console.log('Fetching data for user:', userId);
-    const fetchData = async(userId)=>{
-      try{
-        const response = await axios.get(`http://localhost:3000/api/user/${userId}`);
-        //console.log('Response data:', response.data);
-        setUserName(response.data.result);
-      }catch(error){
-        console.error('Error fetching data:', error);
-      }
-    }
-    fetchData(userId);
-  },[userId])
+    // Getting the authenticated userName from useUser hook
+    const { user } = useUser();
+    const userName = user.name;
 
   return (
  
@@ -91,7 +75,7 @@ const Side = () => {
               <div className='flex justify-center items-center '>
 
                 <button onClick={() => setCollapsed(!collapsed)}>
-                    <h3 className='font-notosans text-3xl md:text-5xl font-bold text-center'>{userName.name}</h3>
+                    <h3 className='font-notosans text-black text-2xl md:text-3xl font-bold text-center'>Hi! {userName}</h3>
                 </button>
               </div>
             )}

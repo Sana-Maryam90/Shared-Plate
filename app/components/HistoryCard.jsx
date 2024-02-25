@@ -20,7 +20,7 @@ const GiveCard = ({label, icon, data}) => {
             {label}
           </h1>
         </div>
-        <p className="font-notosans text-lg text-center">{data}</p>
+        <p className="font-notosans text-lg text-center">{data? data: "0"}</p>
       </div>
     );
 }
@@ -32,51 +32,53 @@ const HistoryCard = ({title}) => {
   const [historicalData, setHistoricalData] = useState([]);
 
   useEffect(()=>{
-    const fetchData=async()=>{
-      try{
-        const response = await axios.get(`http://localhost:3000/api/profile/${userId}`);
-        setHistoricalData(response.data.result);
-      }catch(error){
-        console.error('Error fetching data:', error);
+    const fetchData = async (userId) => {
+      try {
+        const response = await axios.post(
+          `http://localhost:3000/api/profile/${userId}`
+        );
+        console.log(response.data);
+        setHistoricalData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
-    }
-    fetchData();
+    };
+    fetchData(userId);
   },[userId])
 
   return (
-    <div className='w-[95%] md:w-[80%] lg:w-[40%]'>
+    <div className="w-[95%] md:w-[80%] lg:w-[40%]">
       <div className="w-[100%] md:w-[100%] lg:w-[100%] my-5 md:my-10 ">
         <p className="font-notosans text-xl md:text-2xl lg:text-3xl font-semibold lg:font-bold mb-2 lg:mb-4">
           {title}
         </p>
-  
+
         <div className="w-[100%] flex flex-row justify-center mt-4 lg:mt-0 bg-green/10 border border-black/25">
           <div className="w-[100%] mt-3 flex flex-col lg:mt-5 lg:flex lg:items-center lg:gap-1">
             {historicalData && (
-            <>
-            
-            <GiveCard
-              label="No of ongoing requests"
-              icon={<FaHourglassHalf/>}
-              data={historicalData.ongoingRequests}
-            />
-            <GiveCard
-              label="No of times food given"
-              icon={<FaHandshakeAngle/>}
-              data={historicalData.giverCount}
-            />
-            <GiveCard
-              label="No of times food taken"
-              icon={<FaMotorcycle />}
-              data={historicalData.takerCount}
-            />
-            </>
-          )}
+              <>
+                <GiveCard
+                  label="No of ongoing requests"
+                  icon={<FaHourglassHalf />}
+                  data={historicalData.ongoingRequests}
+                />
+                <GiveCard
+                  label="No of times food given"
+                  icon={<FaHandshakeAngle />}
+                  data={historicalData.giverRequests}
+                />
+                <GiveCard
+                  label="No of times food taken"
+                  icon={<FaMotorcycle />}
+                  data={historicalData.takerRequests}
+                />
+              </>
+            )}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
   
