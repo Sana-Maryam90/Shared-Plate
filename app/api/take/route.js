@@ -46,6 +46,10 @@ export async function POST(request) {
             existingTaker = await Taker.create({ userId, name, contact, comment, location });
         }
 
+        // Add the userId of the taker to the requestedBy field in the give request
+        giveRequest.requestedBy.push(userId);
+        await giveRequest.save();
+
         // Construct Google Maps link using latitude and longitude
         const mapLink = `https://www.google.com/maps?q=${location.latitude},${location.longitude}`;
 
@@ -70,7 +74,8 @@ export async function POST(request) {
                         <li style="margin-bottom: 5px; color: #666666;"><strong>Comment:</strong> ${comment}</li>
                         <li style="margin-bottom: 5px; color: #666666;"><strong>Location:</strong> <a href="${mapLink}" style="color: #007bff; text-decoration: none;">View Location on Map</a></li>
                     </ul>
-                    <button id="acceptRequestButton">Accept Request</button>
+                    <a href="http://localhost:3000/account">View Request on App</a>
+
                 </div>
                 <p style="color: #666666;">Thank you for your generosity.</p>
                 <p style="color: #666666;">Best regards,<br><strong>Team SharedPlate</strong></p>
