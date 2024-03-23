@@ -74,19 +74,18 @@ Once the server is running, you can access the application by navigating to `htt
 - Explore the various features of Shared Plate such as making donation requests, fulfilling requests, and managing donations.
 - Test the functionality thoroughly to ensure everything is working as expected.
 
+7. **Contribute**:
+If you'd like to contribute to the development of Shared Plate, feel free to fork the repository, make your changes, and submit a pull request. Don't forget to follow the project's contribution guidelines.
+
+8. **Feedback**:
+We welcome any feedback or suggestions for improving Shared Plate. Feel free to open an issue on GitHub or reach out to the project maintainers directly.
+
 ## Contributors 🧑‍💻
 
 - [Ayesha Imam](https://github.com/Ayesha-Imam)
 - [Sana Maryam](https://github.com/Sana-Maryam90)
 - [Maria Ashfaq](https://github.com/mariaashfaq02)
 - [Fatima Zehra](https://github.com/FZehra1512)
-
-
-7. **Contribute**:
-If you'd like to contribute to the development of Shared Plate, feel free to fork the repository, make your changes, and submit a pull request. Don't forget to follow the project's contribution guidelines.
-
-8. **Feedback**:
-We welcome any feedback or suggestions for improving Shared Plate. Feel free to open an issue on GitHub or reach out to the project maintainers directly.
 
 ## Additional Information ℹ️
 
