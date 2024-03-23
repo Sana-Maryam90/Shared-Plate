@@ -1,10 +1,41 @@
 # Shared Plate
 
-Shared Plate is an application designed to address the critical issues of food wastage and hunger by facilitating the donation and distribution of surplus food to those in need. Through this platform, individuals and organizations can easily connect to ensure that no edible food goes to waste, thereby contributing to a more sustainable and compassionate society.
+Shared Plate is a web application developed with Next.js, Tailwind CSS, and MongoDB, designed to address the critical issues of food wastage and hunger, with a focus on alleviating these challenges in Pakistan. The platform facilitates the process of food donation and distribution by providing users with a seamless and user-friendly interface, coupled with efficient communication channels.
 
-## Project Description
+## Objective
 
-The main goal of Shared Plate is to reduce food wastage and alleviate hunger worldwide, with a particular focus on addressing these issues in Pakistan. The application allows users to make food donation requests, which can be fulfilled by other users willing to donate surplus food. By providing a user-friendly interface and efficient communication channels, Shared Plate aims to streamline the process of food donation and distribution, ultimately making a positive impact on both the environment and the community.
+The main goal of Shared Plate is to reduce food wastage and alleviate hunger worldwide, with a particular emphasis on tackling these issues within Pakistan. By connecting individuals and organizations with surplus food to those in need, Shared Plate aims to make a positive impact on both the environment and the community.
+
+## Key Features
+
+### User Authentication
+Users are required to create an account and log in to access the platform.
+Authentication ensures secure and personalized access to the application's features.
+
+### Giveaway Requests
+Users can create giveaway requests for surplus food.
+A form is provided for users to input details such as pickup location (utilizing Google Maps integration), donor name, organization name (if applicable), food servings, food type, and other relevant information.
+
+### Nearby Request Search
+Users can search for nearby donation requests within a 10km radius of their current location.
+Requests are displayed on Google Maps as markers and in a sidebar for easy navigation.
+Detailed information about each request is accessible by clicking on the corresponding marker or request card.
+
+### Request Taking
+Users interested in claiming food from a donation request can initiate a request to "take" the food.
+Upon submission, the donor receives an email notification informing them of the request.
+The donor has the option to accept or reject the request.
+If accepted, the taker can proceed to collect the food from the donor's location.
+
+## Technologies Used
+
+- **Frontend:** Next.js, Tailwind CSS
+- **Backend:** MongoDB
+- **Maps Integration:** Google Maps API
+
+## Video Demonstration
+
+https://www.youtube.com/watch?v=xLktRJ97nGM
 
 ## Guidelines to Run the App
 
@@ -42,6 +73,14 @@ Once the server is running, you can access the application by navigating to `htt
 6. **Explore and Test**:
 - Explore the various features of Shared Plate such as making donation requests, fulfilling requests, and managing donations.
 - Test the functionality thoroughly to ensure everything is working as expected.
+
+## Contributors
+
+- [Ayesha Imam](https://github.com/Ayesha-Imam)
+- [Sana Maryam](https://github.com/Sana-Maryam90)
+- [Maria Ashfaq](https://github.com/mariaashfaq02)
+- [Fatima Zehra](https://github.com/FZehra1512)
+
 
 7. **Contribute**:
 If you'd like to contribute to the development of Shared Plate, feel free to fork the repository, make your changes, and submit a pull request. Don't forget to follow the project's contribution guidelines.
