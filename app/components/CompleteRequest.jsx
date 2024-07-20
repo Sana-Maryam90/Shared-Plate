@@ -28,7 +28,7 @@ const CompleteRequest = ({ requestId }) => {
   return (
     <div>
       <button className="btn-primary mb-3" onClick={handleCompleteRequest}>
-        Logout
+        Completed
       </button>
     </div>
   );
