@@ -18,12 +18,12 @@ export default function TakeForm({ requestId }) {
           url: "http://localhost:3000/api/currentUser",
           method: "GET",
         });
-        console.log("Successfully get user: ", response.data);
+        // console.log("Successfully get user: ", response.data);
         setUser(response.data);
       } catch (error) {
         if (error.response.status === 401) {
           setUser(error.response.data);
-          console.log("401 Response: ", error.response.data);
+          // console.log("401 Response: ", error.response.data);
         } else
           console.error("Error fetching current user:", error.response.data);
       }

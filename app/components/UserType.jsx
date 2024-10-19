@@ -15,12 +15,12 @@ export default function UserType() {
           url: "http://localhost:3000/api/currentUser",
           method: "GET",
         });
-        console.log("Successfully get user: ", response.data);
+        // console.log("Successfully get user: ", response.data);
         setUser(response.data);
       } catch (error) {
         if (error.response.status === 401) {
           setUser(error.response.data);
-          console.log("401 Response: ", error.response.data)
+          // console.log("401 Response: ", error.response.data)
         }
         else console.error("Error fetching current user:", error.response.data);
       }
@@ -28,7 +28,7 @@ export default function UserType() {
 
     getCurrentUser();
   }, []);
-  console.log("User Hook Data: ", user);
+  // console.log("User Hook Data: ", user);
 
   return (
     <>
