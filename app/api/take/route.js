@@ -55,12 +55,12 @@ export async function POST(request) {
 
         // Construct email message
         const mailOptions = {
-            from: process.env.EMAIL, // Sender email address
-            to: giverEmail, // Receiver email address (giver's email)
-            subject: 'New Take Request', // Email subject
-            text: `A new user wants to take on your give request. User details: Name - ${name}, Contact - ${contact}, Comment - ${comment}, Location - ${location}`, // Plain text body
-            // HTML body can be added if needed
-            html: `
+          from: process.env.EMAIL, // Sender email address
+          to: giverEmail, // Receiver email address (giver's email)
+          subject: "New Take Request", // Email subject
+          text: `A new user wants to take on your give request. User details: Name - ${name}, Contact - ${contact}, Comment - ${comment}, Location - ${location}`, // Plain text body
+          // HTML body can be added if needed
+          html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e0e0e0;">
                 <h2 style="color: #333333;">New Take Request</h2>
                 <hr style="border: 0; border-top: 1px solid #e0e0e0;">
@@ -74,13 +74,13 @@ export async function POST(request) {
                         <li style="margin-bottom: 5px; color: #666666;"><strong>Comment:</strong> ${comment}</li>
                         <li style="margin-bottom: 5px; color: #666666;"><strong>Location:</strong> <a href="${mapLink}" style="color: #007bff; text-decoration: none;">View Location on Map</a></li>
                     </ul>
-                    <button>Accept Request</button>
+                    <button style="margin-top: 14px; margin-bottom: 14px; color: #f9f9f9; background-color: #149954; padding: 4px 8px;">Accept Request</button>
 
                 </div>
                 <p style="color: #666666;">Thank you for your generosity.</p>
                 <p style="color: #666666;">Best regards,<br><strong>Team SharedPlate</strong></p>
             </div>
-        `
+        `,
         };
 
         // Send email notification to the giver

@@ -30,6 +30,10 @@ export async function POST(request) {
             ]
         });
 
+        const createdGiveRequests = await GiveRequest.find({
+          giverId: userId,
+          status: "open",
+        });
         // Find open requests with requestedBy field
         const openRequestedBy = await GiveRequest.find({
             giverId: userId,
@@ -54,7 +58,16 @@ export async function POST(request) {
         });
 
         // Return the requests in the response
-        return NextResponse.json({ giverRequests, takerRequests, ongoingRequests, takersRequesting, openRequestsNotRequested }, { status: 200 });
+        return NextResponse.json(
+          {
+            giverRequests,
+            takerRequests,
+            ongoingRequests,
+            createdGiveRequests, takersRequesting,
+            openRequestsNotRequested,
+          },
+          { status: 200 }
+        );
     } catch (error) {
         console.error('Error fetching user requests:', error.message);
         // Handle errors and return appropriate response

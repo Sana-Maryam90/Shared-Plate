@@ -11,7 +11,6 @@ export default function GiveForm() {
   // Getting userId from custom hook
   const { user } = useUser();
   const userId = user.userId;
-  console.log(userId);
 
   //new
   const [selectedLocation, setSelectedLocation] = useState(null);
