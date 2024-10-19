@@ -20,6 +20,10 @@ module.exports = {
         white: "#fffff3",
         green: "#149954",
         red: "#A3333D",
+        deepBlue: "#0B3954",
+        skyblue: "#C9F0FF",
+        bgwhite: "#EAFFFD",
+        violet: "#c53a94",
       },
       animation: {
         fadeIn: "fadeIn 2s ease-out",

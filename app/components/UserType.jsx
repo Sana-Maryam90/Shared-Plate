@@ -1,34 +1,19 @@
 "use client";
-import React, { useEffect } from "react";
-import { useUser } from '../hooks/UserContext';
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import axios from "axios";
+import { getCurrentUser } from "./GetUser";
 
 export default function UserType() {
-  const { user, setUser } = useUser();
+  const [user, setUser] = useState([]);
 
-  // Get the current user data from the backend API
   useEffect(() => {
-    const getCurrentUser = async () => {
-      try {
-        const response = await axios({
-          url: "http://localhost:3000/api/currentUser",
-          method: "GET",
-        });
-        // console.log("Successfully get user: ", response.data);
-        setUser(response.data);
-      } catch (error) {
-        if (error.response.status === 401) {
-          setUser(error.response.data);
-          // console.log("401 Response: ", error.response.data)
-        }
-        else console.error("Error fetching current user:", error.response.data);
-      }
+    const fetchUser = async () => {
+      const userDetails = await getCurrentUser();
+      setUser(userDetails);
     };
 
-    getCurrentUser();
+    fetchUser();
   }, []);
-  // console.log("User Hook Data: ", user);
 
   return (
     <>
