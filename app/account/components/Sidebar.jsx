@@ -1,10 +1,9 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import { TbCategoryFilled, TbLogout } from "react-icons/tb";
-import { FaBox, FaUsers } from "react-icons/fa6";
-import { BsBarChartLineFill, BsCartCheckFill } from "react-icons/bs";
-import { RiAdminFill } from "react-icons/ri";
-import { IoIosArrowDown } from "react-icons/io";
+import { FaBoxOpen } from "react-icons/fa";
+import { BsBarChartLineFill } from "react-icons/bs";
+import { MdOutlineDirectionsBike } from "react-icons/md";
+import { FaPeopleCarryBox } from "react-icons/fa6";
 import Logout from "@/app/components/Logout";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -21,7 +20,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   const linkClass = "w-full cursor-pointer";
   const flexClass =
-    "flex items-center px-4 py-6 rounded-lg transition-colors hover:bg-cherryBlossomPink";
+    "flex items-center px-4 py-6 rounded-lg transition-colors from-sky-800 to-violet hover:bg-gradient-to-br";
   const iconClass = "w-5 text-lg inline-block mr-4";
 
   return (
@@ -35,7 +34,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       </div>
       <ul>
         <Link
-          href="/adminDashboard"
+          href="/account/dashboard"
           className={linkClass}
           onClick={closeSidebar}
         >
@@ -44,84 +43,36 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           </li>
         </Link>
 
-        <li
-          className="w-full cursor-pointer px-4 py-6  rounded-lg transition-colors hover:bg-cherryBlossomPink"
-          onClick={() => toggleDropdown(setCategoriesOpen)}
-        >
-          <div className="flex items-center">
-            <TbCategoryFilled className={iconClass} /> Created Requests
-            <IoIosArrowDown
-              className={`text-xl pt-1 ml-auto transition-transform duration-300 ${
-                categoriesOpen ? "rotate-180" : "rotate-0"
-              }`}
-            />
-          </div>
-          <ul
-            className={`ml-9 text-base flex flex-col gap-4 transition-all duration-300 overflow-hidden ${
-              categoriesOpen
-                ? "mt-3 mb-1 max-h-40 opacity-100"
-                : "my-0 max-h-0 opacity-0"
-            }`}
-          >
-            <Link
-              href="/adminDashboard/manageCategories"
-              onClick={closeSidebar}
-            >
-              Give Requests
-            </Link>
-            <Link
-              href="/adminDashboard/manageCategories"
-              onClick={closeSidebar}
-            >
-              Take Requests
-            </Link>
-          </ul>
-        </li>
-
-        <li
-          className="w-full cursor-pointer px-4 py-6 rounded-lg transition-colors hover:bg-cherryBlossomPink"
-          onClick={() => toggleDropdown(setProductsOpen)}
-        >
-          <div className="flex items-center">
-            <FaBox className={iconClass} /> Ongoing Requests
-            <IoIosArrowDown
-              className={`text-xl pt-1 ml-auto transition-transform duration-300 ${
-                productsOpen ? "rotate-180" : "rotate-0"
-              }`}
-            />
-          </div>
-          <ul
-            className={`ml-9 text-base flex flex-col gap-4 transition-all duration-300 overflow-hidden ${
-              productsOpen
-                ? "mt-3 mb-1 max-h-40 opacity-100"
-                : "my-0 max-h-0 opacity-0"
-            }`}
-          >
-            <Link href="/adminDashboard/addProduct" onClick={closeSidebar}>
-              Give Requests
-            </Link>
-            <Link href="/adminDashboard/manageProducts" onClick={closeSidebar}>
-              Take Requests
-            </Link>
-          </ul>
-        </li>
-
         <Link
-          href="/adminDashboard/users"
+          href="/account/openrequests"
           className={linkClass}
           onClick={closeSidebar}
         >
           <li className={flexClass}>
-            <FaUsers className={iconClass} /> History
+            <FaBoxOpen className={iconClass} /> Open Requests
           </li>
         </Link>
 
-        <button className={linkClass} onClick={closeSidebar}>
+        <Link
+          href="/account/ongoingrequests"
+          className={linkClass}
+          onClick={closeSidebar}
+        >
           <li className={flexClass}>
-            <TbLogout className={iconClass} />
-            <Logout />
+            <MdOutlineDirectionsBike className={iconClass} /> Ongoing Requests
           </li>
-        </button>
+        </Link>
+
+        <Link
+          href="/account/closedrequests"
+          className={linkClass}
+          onClick={closeSidebar}
+        >
+          <li className={flexClass}>
+            <FaPeopleCarryBox className={iconClass} /> Closed Requests
+          </li>
+        </Link>
+        <Logout linkClass={linkClass} flexClass={flexClass} iconClass={iconClass}/>
       </ul>
     </div>
   );

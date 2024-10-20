@@ -28,9 +28,9 @@ const DashboardLayout = ({ children }) => {
       <Toast />
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <div className="flex-1 flex flex-col">
-        <Navbar toggleSidebar={toggleSidebar} userInfo={user}/>
+        <Navbar toggleSidebar={toggleSidebar} userInfo={user} />
         <main
-          className={`flex-1 pt-16 lg:pl-56 transition-all duration-300 ease-in-out ${
+          className={`flex-1 pt-[4.5rem] lg:pl-64 transition-all duration-300 ease-in-out ${
             isSidebarOpen ? "lg:ml-64" : "lg:ml-0"
           }`}
         >

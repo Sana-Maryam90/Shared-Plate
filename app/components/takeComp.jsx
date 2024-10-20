@@ -49,7 +49,7 @@ const TakeComp = ({ fetchedData }) => {
           return distance <= 10;
         });
         setFilteredRequests(filtered);
-        console.log(filteredRequests);
+        // console.log(filteredRequests);
       }
     };
 
