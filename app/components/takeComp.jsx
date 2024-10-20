@@ -87,7 +87,7 @@ const TakeComp = ({ fetchedData }) => {
         <GoogleMap requests={filteredRequests} userLocation={userLocation} onMarkerClick={handleMarkerClick}/>
       </div>
 
-      <div className='flex flex-col bg-white items-center w-[100%] md:w-[40%] 2xl:w-[30%] xl:w-[30%] lg:w-[30%] overflow-y-auto'>
+      <div className='flex flex-col bg-bgwhite items-center w-[100%] md:w-[40%] 2xl:w-[30%] xl:w-[30%] lg:w-[30%] overflow-y-auto'>
       {loading ? (
           <div>Loading...</div>
         ) : (
