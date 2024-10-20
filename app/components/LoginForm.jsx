@@ -102,7 +102,7 @@ export default function LoginForm () {
           checked={isRememberMe}
           onChange={handleCheckboxChange}
           required
-          className="relative peer shrink-0 appearance-none w-4 h-4 border-2 border-black rounded-sm bg-white mt-1 checked:bg-black checked:border-0"
+          className="relative peer shrink-0 appearance-none w-4 h-4 border-2 border-black rounded-sm bg-bgwhite mt-1 checked:bg-black checked:border-0"
         />
         <label htmlFor="remenber" className="text-lg font-notosans">
           Remember Me

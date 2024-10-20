@@ -29,7 +29,7 @@ export default async function TakeRequest({params}) {
     <main className="min-h-screen flex flex-col w-full items-center">
       <Toast />
 
-      <h4 className="logo-primary w-full text-center py-5 fixed bg-white">
+      <h4 className="logo-primary w-full text-center py-5 fixed bg-bgwhite">
         SHARED PLATE
       </h4>
 
