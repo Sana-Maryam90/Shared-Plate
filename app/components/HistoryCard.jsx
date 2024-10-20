@@ -49,13 +49,13 @@ const HistoryCard = ({title}) => {
 
   return (
     <div className="w-[95%] md:w-[80%] lg:w-[40%]">
-      <div className="w-[100%] md:w-[100%] lg:w-[100%] my-5 md:my-10 ">
+      <div className="w-[100%] md:w-[100%] lg:w-[100%] ">
         <p className="font-notosans text-xl md:text-2xl lg:text-3xl font-semibold lg:font-bold mb-2 lg:mb-4">
           {title}
         </p>
 
         <div className="w-[100%] flex flex-row justify-center mt-4 lg:mt-0 bg-green/10 border border-black/25">
-          <div className="w-[100%] mt-3 flex flex-col lg:mt-5 lg:flex lg:items-center lg:gap-1">
+          <div className="w-[100%] mt-3 flex flex-col lg:flex lg:items-center lg:gap-1">
             {historicalData && (
               <>
                 <GiveCard

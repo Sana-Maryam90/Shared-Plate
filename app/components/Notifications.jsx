@@ -1,27 +1,54 @@
 import { toast } from "react-toastify";
+import React, { useState, useEffect } from "react";
 import { useUser } from "../hooks/UserContext";
-export default function Notifications({ notifications }) {
+import axios from "axios";
+
+
+export default function Notifications() {
   const { user } = useUser();
   const userId = user.userId;
 
+  const [notifications, setNotifications] = useState([]);
+  useEffect(() => {
+    const getData = async (userId) => {
+    const data = {userId}
+      try {
+        const response = await axios({
+          url: "http://localhost:3000/api/profile",
+          method: "POST",
+          data: data,
+        });
+        if (response.data.result) {
+          console.log("API Response:", response.data);
+          setNotifications(response.data.takersRequesting);
+        } else {
+          setNotifications([]);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    getData(userId);
+  }, [userId]);
 
   const handleClick = async (requestId) => {
     const closeRequestdata = {
       userId,
       requestId
     };
-    console.log("closeRequestdata", closeRequestdata);
-    try {
-      const response = await axios({
-        url: "http://localhost:3000/api/acceptRequest",
-        method: "POST",
-        data: closeRequestdata,
-      });
-      console.log("API Response:", response.data);
-      toast.success("Request Accepted")
-    } catch (error) {
-        console.error("Error fetching data:", error);
-    }
+    // console.log("closeRequestdata", closeRequestdata);
+    // try {
+    //   const response = await axios({
+    //     url: "http://localhost:3000/api/acceptRequest",
+    //     method: "POST",
+    //     data: closeRequestdata,
+    //   });
+    //   console.log("API Response:", response.data);
+    //   toast.success("Request Accepted")
+    // } catch (error) {
+    //     console.error("Error fetching data:", error);
+    // }
   };
   console.log(notifications);
   const notifi = [

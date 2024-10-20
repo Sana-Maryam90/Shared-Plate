@@ -1,5 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server';
 import jwt from 'jsonwebtoken';
+import User from '@/models/user';
 
 export async function GET(request) {
     try {
@@ -13,9 +14,13 @@ export async function GET(request) {
 
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.userId);
+    if (!user) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    }
 
     // Return user data
-    return NextResponse.json({ isAuthenticated: true, userId: decoded.userId, name: decoded.name }, {status: 200});
+    return NextResponse.json({ isAuthenticated: true, userId: decoded.userId, name: decoded.name, email: user.email }, {status: 200});
 
     } catch (error) {
       // Invalid token or token verification failed

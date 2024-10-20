@@ -12,7 +12,7 @@ const Logout = () => {
             url:"http://localhost:3000/api/logout",
             method:"POST"
         })
-        console.log("Logout Successful Response:",response.data);
+        // console.log("Logout Successful Response:",response.data);
         toast.success("Logout successful!");
 
         //navigate to home page
@@ -25,9 +25,7 @@ const Logout = () => {
 }
 
   return (
-    <div>
-      <button className="btn-primary mb-3" onClick={handleLogout}>Logout</button>
-    </div>
+      <a onClick={handleLogout}>Logout</a>
   )
 }
 

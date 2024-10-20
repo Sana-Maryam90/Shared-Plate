@@ -3,9 +3,25 @@
 @tailwind utilities;
 
 :root {
-  --foreground-color: #000000;
-  --background-color: #fffff3;
+  --foreground-color: #0B3954;
+  --background-color: #EAFFFD;
 }
+
+/* html {
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(1rem + 0.375 * ((100vw - 320px) / 680));
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  html {
+    font-size: 1.375rem;
+  }
+} */
 
 body {
   color: var(--foreground-color);
@@ -14,7 +30,7 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply bg-black h-10 w-28 lg:h-12 lg:w-32 text-white font-notoSans font-semibold text-lg lg:text-xl transition-colors hover:bg-green/80 duration-200;
+    @apply text-bgwhite transition-all ease-in-out duration-75 h-10 w-28 lg:h-12 lg:w-32 font-notoSans font-semibold text-lg lg:text-xl bg-deepBlue from-sky-800 to-violet hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-deepBlue/20 dark:focus:ring-deepBlue/5 rounded-lg px-5 py-2.5 text-center me-2 mb-2;
   }
 }
 
