@@ -42,7 +42,7 @@ export default function GiveInfoCard({title, data}) {
   const giveRequestData = data.giveRequest;
   // const giveRequestId = data;
   // console.log(data);
-  console.log("Give Request Data", giveRequestData);
+  // console.log("Give Request Data", giveRequestData);
 
 
   // const [giveRequestData, setGiveRequestData] = useState([]);

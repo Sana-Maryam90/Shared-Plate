@@ -3,37 +3,23 @@ import InputField from "./InputField";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { useUser } from "../hooks/UserContext";
 import axios from "axios";
 import Map from "./inputMap";
+import { getCurrentUser } from "./GetUser";
 
 export default function TakeForm({ requestId }) {
-  const { user, setUser } = useUser();
-
+  const [userId, setUserId] = useState([]);
+  
   // Get the current user data from the backend API
   useEffect(() => {
-    const getCurrentUser = async () => {
-      try {
-        const response = await axios({
-          url: "http://localhost:3000/api/currentUser",
-          method: "GET",
-        });
-        // console.log("Successfully get user: ", response.data);
-        setUser(response.data);
-      } catch (error) {
-        if (error.response.status === 401) {
-          setUser(error.response.data);
-          // console.log("401 Response: ", error.response.data);
-        } else
-          console.error("Error fetching current user:", error.response.data);
-      }
+    const fetchUser = async () => {
+      const userDetails = await getCurrentUser();
+      setUserId(userDetails.userId);
     };
 
-    getCurrentUser();
+    fetchUser();
   }, []);
-  console.log("User Hook Data: ", user);
-  
-  const userId = user.userId;
+
 
   //new
   const [selectedLocation, setSelectedLocation] = useState(null);

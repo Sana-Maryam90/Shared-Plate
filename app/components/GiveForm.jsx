@@ -1,16 +1,23 @@
 "use client";
 import InputField from "../components/InputField";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { useUser } from "../hooks/UserContext";
 import Map from "./inputMap";
 import axios from "axios";
+import { getCurrentUser } from "./GetUser";
 
 export default function GiveForm() {
-  // Getting userId from custom hook
-  const { user } = useUser();
-  const userId = user.userId;
+  const [userId, setUserId] = useState([]);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userDetails = await getCurrentUser();
+      setUserId(userDetails.userId);
+    };
+
+    fetchUser();
+  }, []);
 
   //new
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -94,7 +101,7 @@ export default function GiveForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("formData: ", formData); // new
+    // console.log("formData: ", formData); // new
 
     // Form Data Validation
     if (
@@ -118,7 +125,7 @@ export default function GiveForm() {
         ...formData,
         userId: userId,
       };
-      console.log("formDataWithUserId Data: ", formDataWithUserId);
+      // console.log("formDataWithUserId Data: ", formDataWithUserId);
       try {
         const response = await axios({
           url: "http://localhost:3000/api/give",

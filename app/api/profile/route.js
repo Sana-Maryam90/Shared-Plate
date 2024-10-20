@@ -5,79 +5,82 @@ import { connectDb } from '@/helper/db';
 
 export async function POST(request) {
     try {
-        await connectDb();
+      await connectDb();
 
-        // Extract the userId from the request parameters
-        const { userId } = await request.json();
+      // Extract the userId from the request parameters
+      const { userId } = await request.json();
 
-        // Find all closed requests where the user acted as a giver
-        const closedGiveRequest = await GiveRequest.find({
-            giverId: userId,
-            status: 'closed'
-        });
+      // Find all closed requests where the user acted as a giver
+      const closedGiveRequest = await GiveRequest.find({
+        giverId: userId,
+        status: "closed",
+      });
 
-        // Find all closed requests where the user acted as a taker (volunteer)
-        const closedTakeRequest = await GiveRequest.find({
-            volunteerId: userId,
-            status: 'closed'
-        });
+      // Find all closed requests where the user acted as a taker (volunteer)
+      const closedTakeRequest = await GiveRequest.find({
+        volunteerId: userId,
+        status: "closed",
+      });
 
-        // Find ongoing requests for the user as a giver
-        const ongoingGiveRequest = await GiveRequest.find({
-            giverId: userId,
-            status: 'ongoing'
-        });
+      // Find ongoing requests for the user as a giver
+      const ongoingGiveRequest = await GiveRequest.find({
+        giverId: userId,
+        status: "ongoing",
+      });
 
-        // Find ongoing requests for the user as a taker (volunteer)
-        const ongoingTakeRequest = await GiveRequest.find({
-            volunteerId: userId,
-            status: 'ongoing'
-        });
+      // Find ongoing requests for the user as a taker (volunteer)
+      const ongoingTakeRequest = await GiveRequest.find({
+        volunteerId: userId,
+        status: "ongoing",
+      });
 
-        // Find open requests where the user is a giver (whether requested or not)
-        const openGiveRequests = await GiveRequest.find({
-            giverId: userId,
-            status: 'open'
-        });
+      // // Find open requests where the user is a giver (whether requested or not)
+      const openGiveRequests = await GiveRequest.find({
+          giverId: userId,
+          status: 'open'
+      });
 
-        // Extract user IDs from requestedBy field in open requests
-        const userIds = openGiveRequests.reduce((acc, curr) => {
-            if (curr.requestedBy) {
-                acc.push(...curr.requestedBy);
-            }
-            return acc;
-        }, []);
+      // Extract user IDs from requestedBy field in open requests
+      const userIds = openGiveRequests.reduce((acc, curr) => {
+          if (curr.requestedBy) {
+              acc.push(...curr.requestedBy);
+          }
+          return acc;
+      }, []);
 
-        // Find Takers based on user IDs from requestedBy field
-        const takersRequesting = await Taker.find({ userId: { $in: userIds } });
+      // Find Takers based on user IDs from requestedBy field
+      const takersRequesting = await Taker.find({ userId: { $in: userIds } });
 
-        // Attach taker information to openGiveRequests if requestedBy exists
-        const openGiveRequest = openGiveRequests.map(req => {
-            if (req.requestedBy) {
-                return {
-                    ...req._doc,
-                    takersRequesting: takersRequesting.filter(taker => req.requestedBy.includes(taker.userId))
-                };
-            } else {
-                return req;
-            }
-        });
+      // Attach taker information to openGiveRequests if requestedBy exists
+      const openGiveRequest = openGiveRequests.map(req => {
+          if (req.requestedBy) {
+              return {
+                  ...req._doc,
+                  takersRequesting: takersRequesting.filter(taker => req.requestedBy.includes(taker.userId))
+              };
+          } else {
+              return req;
+          }
+      });
 
-        // Find open requests where the user has requested to take (openTakeRequest)
-        const openTakeRequest = await GiveRequest.find({
-            requestedBy: userId,
-            status: 'open'
-        });
+      // Find open requests where the user has requested to take (openTakeRequest)
+      const openTakeRequest = await GiveRequest.find({
+        requestedBy: userId,
+        status: "open",
+      });
 
-        // Return the requests in the response
-        return NextResponse.json({
-            closedGiveRequest,
-            closedTakeRequest,
-            ongoingGiveRequest,
-            ongoingTakeRequest,
-            openGiveRequest,
-            openTakeRequest
-        }, { status: 200 });
+      // Return the requests in the response
+      return NextResponse.json(
+        {
+          closedGiveRequest,
+          closedTakeRequest,
+          ongoingGiveRequest,
+          ongoingTakeRequest,
+          openGiveRequest,
+          openTakeRequest,
+        },
+        { status: 200 }
+      );
     } catch (error) {
         console.error('Error fetching user requests:', error.message);
         // Handle errors and return appropriate response

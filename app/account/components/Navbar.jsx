@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { BiSearchAlt, BiSolidBell, BiHome } from "react-icons/bi";
 import { BsPersonCircle } from "react-icons/bs";
+import { useRequests } from "@/app/hooks/RequestsContext";
 
-const Navbar = ({ toggleSidebar, userInfo }) => {
+const Navbar = ({ toggleSidebar }) => {
+  const { user } = useRequests();
   const [showMobileSearch, setShowMobileSearch] = useState(false);
 
   const toggleSearchBar = () => {
@@ -32,8 +34,8 @@ const Navbar = ({ toggleSidebar, userInfo }) => {
           >
             <FaBarsStaggered size={24} />
           </button>
-          <span className="text-xl font-semibold ml-4 md:ml-6 lg:ml-64">
-            Hi! {userInfo.name}
+          <span className="text-base md:text-xl font-semibold ml-4 md:ml-6 lg:ml-64">
+            Hi! {user.name ? user.name.split(" ").slice(0, 1).join(" ") : <></>}
           </span>
         </div>
 
@@ -79,10 +81,13 @@ const Navbar = ({ toggleSidebar, userInfo }) => {
                 <div
                   onMouseEnter={() => handleHover(true)}
                   onMouseLeave={() => handleHover(false)}
-                  className="absolute right-0 mt-4 w-48 bg-bgwhite border border-deepBlue/35 shadow-lg rounded-lg p-4"
+                  className="absolute right-0 mt-4 w-auto bg-bgwhite border border-deepBlue/35 shadow-lg rounded-lg p-4"
                 >
-                  <p className="text-lg font-semibold">{userInfo.name}</p> {/* Username */}
-                  <p className="text-base text-gray-500">{userInfo.email}</p>{" "}
+                  <p className="text-lg font-semibold">{user && user.name}</p>{" "}
+                  {/* Username */}
+                  <p className="text-base text-gray-500 ">
+                    {user && user.email}
+                  </p>{" "}
                 </div>
               )}
             </div>

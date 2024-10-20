@@ -54,6 +54,11 @@ export async function POST(request) {
         const mapLink = `https://www.google.com/maps?q=${location.latitude},${location.longitude}`;
 
         // Construct email message
+
+        const commentHTML = comment !== undefined 
+                            ? `<li style="margin-bottom: 5px; color: #666666;"><strong>Comment:</strong> ${comment}</li>` 
+                            : "";
+
         const mailOptions = {
           from: process.env.EMAIL, // Sender email address
           to: giverEmail, // Receiver email address (giver's email)
@@ -71,7 +76,7 @@ export async function POST(request) {
                     <ul style="list-style: none; padding: 0; margin: 0;">
                         <li style="margin-bottom: 5px; color: #666666;"><strong>Name:</strong> ${name}</li>
                         <li style="margin-bottom: 5px; color: #666666;"><strong>Contact:</strong> ${contact}</li>
-                        <li style="margin-bottom: 5px; color: #666666;"><strong>Comment:</strong> ${comment}</li>
+                        ${commentHTML}
                         <li style="margin-bottom: 5px; color: #666666;"><strong>Location:</strong> <a href="${mapLink}" style="color: #007bff; text-decoration: none;">View Location on Map</a></li>
                     </ul>
                     <button style="margin-top: 14px; margin-bottom: 14px; color: #f9f9f9; background-color: #149954; padding: 4px 8px;">Accept Request</button>

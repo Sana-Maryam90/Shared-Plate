@@ -26,12 +26,13 @@ const Logout = ({linkClass, flexClass, iconClass}) => {
         url: "http://localhost:3000/api/logout", // API URL here
         method: "POST",
       });
-      toast.success("Logout successful!");
-
-      // Navigate to the home page
-      setTimeout(() => {
-        router.push("/");
-      }, 1000);
+      if (response.status === 200) {
+        toast.success("Logout successful!");
+        // Navigate to the home page
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
+      }
     } catch (error) {
       console.error("Request failed with status code", error.response.status);
       toast.error("Logout failed");
