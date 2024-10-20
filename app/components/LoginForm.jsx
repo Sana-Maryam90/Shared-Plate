@@ -32,7 +32,7 @@ export default function LoginForm () {
         password,
         isRememberMe,
       };
-      console.log("Login Data: ", loginData);
+      // console.log("Login Data: ", loginData);
       try {
         const response = await axios({
           url: "http://localhost:3000/api/login",
