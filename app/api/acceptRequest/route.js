@@ -52,26 +52,34 @@ export async function POST(request) {
 
         // Send an email to the taker informing them that their request has been accepted
         const mailOptions = {
-            from: process.env.EMAIL,
-            to: takerEmail,
-            subject: 'Your request has been accepted',
-            html: `
-            <div>
-                <p>Your request has been accepted by ${giveRequest.name}.</p>
-                <p>Details of the give request:</p>
-                <ul>
-                    <li>Name: ${giveRequest.name}</li>
-                    <li>Giving Organization: ${giveRequest.givingOrg}</li>
-                    <li>Contact: ${giveRequest.contact}</li>
-                    <li>Food Type: ${giveRequest.foodType}</li>
-                    <li>Food Serving: ${giveRequest.foodServing}</li>
-                    <li>Availability: ${giveRequest.availability}</li>
-                    <li>Landmark: ${giveRequest.landmark}</li>
-                    <li>Comments: ${giveRequest.comments}</li>
-                    <li>Location: <a href="${mapLink}" style="color: #007bff; text-decoration: none;">View Location on Map</a></li>
-                </ul>
+          from: process.env.EMAIL,
+          to: takerEmail,
+          subject: "Your request has been accepted",
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e0e0e0;">
+                <h2 style="color: #333333;">Take Request Accepted</h2>
+                <hr style="border: 0; border-top: 1px solid #e0e0e0;">
+                <p style="color: #666666;">Dear ${takerUser.name},</p>
+                <p style="color: #666666;">Your take request for the following delivery, has been accepted by ${giveRequest.name}</p>
+                <div style="background-color: #f9f9f9; padding: 10px; margin: 10px 0;">
+                    <h3 style="color: #333333; margin-bottom: 10px;">Request Details:</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 5px; color: #666666;"><strong>Giver Name:</strong> ${giveRequest.name}</li>
+                        <li style="margin-bottom: 5px; color: #666666;"><strong>Giving Organization:</strong> ${giveRequest.givingOrg}</li>
+                        <li style="margin-bottom: 5px; color: #666666;"><strong>Contact:</strong> ${giveRequest.contact}</li>
+                        <li style="margin-bottom: 5px; color: #666666;"><strong>Food Type:</strong> ${giveRequest.foodType}</li>
+                        <li style="margin-bottom: 5px; color: #666666;"><strong>Food Serving:</strong> ${giveRequest.foodServing}</li>
+                        <li style="margin-bottom: 5px; color: #666666;"><strong>Availability:</strong> ${giveRequest.availability}</li>
+                        <li style="margin-bottom: 5px; color: #666666;"><strong>Landmark:</strong> ${giveRequest.landmark}</li>
+                        <li style="margin-bottom: 5px; color: #666666;"><strong>Comments:</strong> ${giveRequest.comments}</li>
+                        <li style="margin-bottom: 5px; color: #666666;"><strong>Location:</strong> <a href="${mapLink}" style="color: #007bff; text-decoration: none;">View Location on Map</a></li>
+                    </ul>
+
+                </div>
+                <p style="color: #666666;">Thank you for your generosity.</p>
+                <p style="color: #666666;">Best regards,<br><strong>Team SharedPlate</strong></p>
             </div>
-            `
+            `,
         };
 
         await transporter.sendMail(mailOptions);

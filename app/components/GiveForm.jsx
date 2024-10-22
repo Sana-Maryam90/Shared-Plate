@@ -54,7 +54,7 @@ export default function GiveForm() {
   }
 
   const validContact = () => {
-    const regex = /^\d{10}$/;
+    const regex = /^\d{11}$/;
     return regex.test(formData.contact);
   };
 

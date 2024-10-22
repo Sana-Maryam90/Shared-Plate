@@ -35,7 +35,7 @@ const Navbar = ({ toggleSidebar }) => {
             <FaBarsStaggered size={24} />
           </button>
           <span className="text-base md:text-xl font-semibold ml-4 md:ml-6 lg:ml-64">
-            Hi! {user.name ? user.name.split(" ").slice(0, 1).join(" ") : <></>}
+            Hi! {user.name ? user.name.split(" ").slice(0, 1).join(" ") : "User"}
           </span>
         </div>
 

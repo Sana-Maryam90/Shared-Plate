@@ -8,7 +8,6 @@ import transporter from "@/helper/nodemailer";
 export async function POST(request) {
   try {
     await connectDb();
-
     // Extract the data from the request body
     const { userId, requestId, reason } = await request.json();
 
@@ -99,7 +98,7 @@ export async function POST(request) {
     // Return a success response
     return NextResponse.json(
       {
-        message: `Give request of ${giveRequest.name} is successfully taken by ${taker.name}`,
+        message: `Take request of ${taker.name} is rejected by the giver ${giveRequest.name}`,
       },
       { status: 200 }
     );

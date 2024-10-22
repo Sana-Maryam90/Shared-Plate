@@ -17,7 +17,7 @@ export async function POST(request) {
       });
 
       // Find all closed requests where the user acted as a taker (volunteer)
-      const closedTakeRequest = await GiveRequest.find({
+      const closedTakeRequests = await GiveRequest.find({
         volunteerId: userId,
         status: "closed",
       });
@@ -29,55 +29,110 @@ export async function POST(request) {
       });
 
       // Find ongoing requests for the user as a taker (volunteer)
-      const ongoingTakeRequest = await GiveRequest.find({
+      const ongoingTakeRequests = await GiveRequest.find({
         volunteerId: userId,
         status: "ongoing",
       });
 
       // // Find open requests where the user is a giver (whether requested or not)
-      const openGiveRequests = await GiveRequest.find({
-          giverId: userId,
-          status: 'open'
+      const openGiveRequest = await GiveRequest.find({
+        giverId: userId,
+        status: "open",
       });
 
       // Extract user IDs from requestedBy field in open requests
-      const userIds = openGiveRequests.reduce((acc, curr) => {
-          if (curr.requestedBy) {
-              acc.push(...curr.requestedBy);
-          }
-          return acc;
+      const userIds = openGiveRequest.reduce((acc, curr) => {
+        if (curr.requestedBy) {
+          acc.push(...curr.requestedBy);
+        }
+        return acc;
       }, []);
 
       // Find Takers based on user IDs from requestedBy field
       const takersRequesting = await Taker.find({ userId: { $in: userIds } });
 
-      // Attach taker information to openGiveRequests if requestedBy exists
-      const openGiveRequest = openGiveRequests.map(req => {
-          if (req.requestedBy) {
-              return {
-                  ...req._doc,
-                  takersRequesting: takersRequesting.filter(taker => req.requestedBy.includes(taker.userId))
-              };
-          } else {
-              return req;
-          }
+      // Attach taker information to openGiveRequests, ongoingGiveRequest if requestedBy exists
+      const openGiveRequests = openGiveRequest.map((req) => {
+        if (req.requestedBy) {
+          return {
+            ...req._doc,
+            takersRequesting: takersRequesting.filter((taker) =>
+              req.requestedBy.includes(taker.userId)
+            ),
+          };
+        } else {
+          return req;
+        }
       });
 
       // Find open requests where the user has requested to take (openTakeRequest)
-      const openTakeRequest = await GiveRequest.find({
+      const openTakeRequests = await GiveRequest.find({
         requestedBy: userId,
         status: "open",
       });
 
+      const ongoingGiveRequests = await Promise.all(
+        ongoingGiveRequest.map(async (req) => {
+          if (req.volunteerId) {
+            try {
+              // Find volunteer info by matching the userId in the Taker table
+              const volunteerInfo = await Taker.find({
+                userId: req.volunteerId,
+              });
+
+              // Return the request with the added volunteer info
+              return {
+                ...req._doc, // Spread the Mongoose document fields
+                volunteerInfo: volunteerInfo, // Add the volunteer info array
+              };
+            } catch (error) {
+              console.error(
+                `Error fetching volunteer info for request ${req._id}:`,
+                error
+              );
+              return req; // Return the original request if error occurs
+            }
+          } else {
+            return req; // Return the original request if no volunteerId exists
+          }
+        })
+      );
+      const closedGiveRequests = await Promise.all(
+        closedGiveRequest.map(async (req) => {
+          if (req.volunteerId) {
+            try {
+              // Find volunteer info by matching the userId in the Taker table
+              const volunteerInfo = await Taker.find({
+                userId: req.volunteerId,
+              });
+
+              // Return the request with the added volunteer info
+              return {
+                ...req._doc, // Spread the Mongoose document fields
+                volunteerInfo: volunteerInfo, // Add the volunteer info array
+              };
+            } catch (error) {
+              console.error(
+                `Error fetching volunteer info for request ${req._id}:`,
+                error
+              );
+              return req; // Return the original request if error occurs
+            }
+          } else {
+            return req; // Return the original request if no volunteerId exists
+          }
+        })
+      );
+
       // Return the requests in the response
       return NextResponse.json(
         {
-          closedGiveRequest,
-          closedTakeRequest,
-          ongoingGiveRequest,
-          ongoingTakeRequest,
-          openGiveRequest,
-          openTakeRequest,
+          closedGiveRequests,
+          closedTakeRequests,
+          ongoingGiveRequests,
+          ongoingTakeRequests,
+          openGiveRequests,
+          openTakeRequests,
         },
         { status: 200 }
       );
@@ -87,6 +142,9 @@ export async function POST(request) {
         return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }
+
+
+
 
 
 

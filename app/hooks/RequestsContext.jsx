@@ -7,15 +7,34 @@ const RequestsContext = createContext();
 
 export const RequestsProvider = ({ children }) => {
   const [requests, setRequests] = useState({
-    closedGiveRequest: [],
-    closedTakeRequest: [],
-    ongoingGiveRequest: [],
-    ongoingTakeRequest: [],
-    openGiveRequest: [],
-    openTakeRequest: [],
+    closedGiveRequests: [],
+    closedTakeRequests: [],
+    ongoingGiveRequests: [],
+    ongoingTakeRequests: [],
+    openGiveRequests: [],
+    openTakeRequests: [],
   });
 
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({ userId: null }); // Initialize user with an object
+
+  const getAllRequests = async (userId) => {
+    setLoading(true);
+    try {
+      const response = await axios({
+        url: "http://localhost:3000/api/profile",
+        method: "POST",
+        data: { userId },
+      });
+      if (response.status === 200) {
+        setRequests(response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching requests data:", error);
+    } finally {
+      setLoading(false); // Set loading to false after data is fetched
+    }
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -24,37 +43,22 @@ export const RequestsProvider = ({ children }) => {
         setUser(userDetails);
       } catch (error) {
         console.error("Error fetching user:", error); // Log any errors encountered
-      }
+      } 
     };
 
     fetchUser();
   }, []);
 
-  const userId = user.userId;
   useEffect(() => {
+    const userId = user.userId;
     if (user || user.userId) {
       // Check if userId is valid before making the API call
-      const getAllRequests = async () => {
-        try {
-          const response = await axios({
-            url: "http://localhost:3000/api/profile",
-            method: "POST",
-            data: { userId },
-          });
-          if (response.status === 200) {
-            setRequests(response.data);
-          }
-        } catch (error) {
-          console.error("Error fetching requests data:", error);
-        }
-      };
-
-      getAllRequests();
+      getAllRequests(userId);
     }
   }, [user]);
 
   return (
-    <RequestsContext.Provider value={{ requests, user }}>
+    <RequestsContext.Provider value={{ requests, user, loading, getAllRequests }}>
       {children}
     </RequestsContext.Provider>
   );

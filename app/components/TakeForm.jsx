@@ -43,7 +43,7 @@ export default function TakeForm({ requestId }) {
 
   // To check the validity of contact
   const validContact = () => {
-    const regex = /^\d{10}$/;
+    const regex = /^\d{11}$/;
     return regex.test(contact);
   };
 
@@ -67,7 +67,7 @@ export default function TakeForm({ requestId }) {
         userId,
         requestId,
       };
-      console.log("Take Form Data: ", takeFormData);
+      // console.log("Take Form Data: ", takeFormData);
       try {
         const response = await axios({
           url: "http://localhost:3000/api/take",
@@ -75,10 +75,10 @@ export default function TakeForm({ requestId }) {
           data: takeFormData,
         });
 
-        console.log(
-          "Take Form successful submission Response: ",
-          response.data
-        );
+        // console.log(
+        //   "Take Form successful submission Response: ",
+        //   response.data
+        // );
         toast.success("Request Successful");
 
         // Navigate to Home Page
