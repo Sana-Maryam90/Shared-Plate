@@ -24,7 +24,7 @@ export default function UserType() {
               Hi! {user.name}
             </h4>
             <Link href={"/account/dashboard"}>
-              <button className="text-white bg-black rounded-full font-notoSans text-base  md:text-xl xl:text-2xl h-7 w-7 md:h-8 md:w-8 md:mr-4 xl:h-10 xl:w-10 xl:mr-9 transition-colors hover:bg-green duration-200">
+              <button className="text-bgwhite bg-deepBlue rounded-full font-notoSans text-base  md:text-xl xl:text-2xl h-7 w-7 md:h-8 md:w-8 md:mr-4 xl:h-10 xl:w-10 xl:mr-9 transition-colors from-deepBlue/80 to-violet hover:bg-gradient-to-br duration-200">
                 {user.name.charAt(0)}
               </button>
             </Link>

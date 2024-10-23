@@ -58,18 +58,18 @@ const Navbar = ({ toggleSidebar }) => {
             </button>
 
             <button className="text-deepBlue focus:outline-none">
-              <BiSolidBell className="text-[24px] md:text-3xl" />
+              <BiSolidBell className="text-[24px] md:text-3xl hover:text-violet" />
             </button>
 
             <Link href="/" className="text-deepBlue focus:outline-none">
-              <BiHome className="text-[24px] md:text-3xl" />
+              <BiHome className="text-[24px] md:text-3xl hover:text-violet" />
             </Link>
 
             <div className="relative inline-block">
               {/* Profile Icon */}
               <div className="text-deepBlue focus:outline-none">
                 <BsPersonCircle
-                  className="text-[24px] md:text-3xl cursor-pointer"
+                  className="text-[24px] md:text-3xl cursor-pointer hover:text-violet"
                   onClick={handleToggle}
                   onMouseEnter={() => handleHover(true)}
                   onMouseLeave={() => handleHover(false)}

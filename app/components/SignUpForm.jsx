@@ -56,7 +56,7 @@ export default function SignUpForm () {
         setPassword("");
       } catch (error) {
         if (error.response) {
-          if (error.response.status === 409) {
+          if (error.response.status === 400) {
             toast.info("User with provided credentials already exists");
           }
           console.error("Response data:", error.response.data);

@@ -5,7 +5,7 @@ import User from '@/models/user';
 export async function GET(request) {
     try {
     const token = request.cookies.get('token')?.value;
-    console.log(token);
+    // console.log(token);
 
     if (!token) {
         // No token provided

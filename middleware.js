@@ -5,7 +5,7 @@ import { NextRequest } from 'next/server'
 export function middleware(request) {
     console.log("middleware executed");
     const token = request.cookies.get('token')?.value;
-    console.log(token);
+    // console.log(token);
 
     const loggedInUserNotAccessPaths = 
     request.nextUrl.pathname === "/login" ||
@@ -14,7 +14,7 @@ export function middleware(request) {
     if (loggedInUserNotAccessPaths){
       // accessing not secured route
       if(token){
-        return NextResponse.redirect(new URL('/account', request.url));
+        return NextResponse.redirect(new URL('/account/dashboard', request.url));
       }
     }else{
       // accessing secured route
@@ -29,5 +29,5 @@ export function middleware(request) {
  
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/login','/signup','/take', '/account','/give',],
+  matcher: ['/login','/signup','/take', '/account/dashboard','/give',],
 }

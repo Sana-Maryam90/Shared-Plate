@@ -82,7 +82,7 @@ import { useState, useEffect } from "react";
 
 const containerStyle = {
   width: "100%",
-  height: "400px",
+  height: "100%",
 };
 
 const defaultLocation = { lat: 24.8607, lng: 67.0011 }; // Fallback for Karachi

@@ -6,7 +6,7 @@ import Image from 'next/image'
 //this is our card component
 const Card = (props) => {
   return (
-    <div className=" bg-green/10 border border-black/25 text-black w-4/5 flex-row m-6 p-4 md:mx-12 justify-center items-center md:w-[90%]">
+    <div className=" bg-skyblue/50 shadow-xl border border-deepBlue/35 text-deepBlue rounded-lg w-4/5 flex-row m-6 p-4 md:mx-12 justify-center items-center md:w-[90%]">
       <div className="break-words font-black text-xl">{props.name}</div>
       <div className="break-words font-bold text-lg">{props.organization}</div>
       <div className="break-words text-base font-semibold text-zinc-600">

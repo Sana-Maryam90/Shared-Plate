@@ -107,44 +107,47 @@ export default function TakeForm({ requestId }) {
     }
   };
   return (
-    <form className="w-3/4 md:w-1/2 lg:w-3/4 xl:w-3/5 my-5 md:my-10">
+    <form className="w-full md:w-4/5 lg:w-full p-6 xl:pl-12">
       <p className="font-notosans text-xl md:text-2xl lg:text-3xl font-semibold lg:font-bold mb-2 lg:mb-4">
         Deliverer Details
       </p>
-      <InputField
-        id="name"
-        label="Name"
-        type="text"
-        placeholder="John Doe"
-        value={name}
-        setter={setName}
-        mt="8px"
-        mb="32px"
-      />
+      <div className="flex flex-col lg:flex-row lg:space-x-6 ">
+        <InputField
+          id="name"
+          label="Name"
+          type="text"
+          placeholder="John Doe"
+          value={name}
+          setter={setName}
+          mt="8px"
+          mb="32px"
+        />
 
-      <InputField
-        id="contact"
-        label="Contact"
-        type="tel"
-        placeholder="12345678910"
-        value={contact}
-        setter={setContact}
-        mt="8px"
-        mb="32px"
-      />
+        <InputField
+          id="contact"
+          label="Contact"
+          type="tel"
+          placeholder="12345678910"
+          value={contact}
+          setter={setContact}
+          mt="8px"
+          mb="32px"
+        />
+      </div>
 
-      <InputField
-        id="comments"
-        label="Additional Information"
-        type="text"
-        placeholder="Food is vegetarian"
-        value={comments}
-        setter={setComments}
-        mt="8px"
-        mb="32px"
-      />
+      <div className="flex flex-col lg:flex-row lg:space-x-6">
+        <InputField
+          id="comments"
+          label="Additional Information"
+          type="text"
+          placeholder="Food is vegetarian"
+          value={comments}
+          setter={setComments}
+          mt="8px"
+          mb="32px"
+        />
 
-      {/* <InputField
+        {/* <InputField
         id="location"
         label="Select Location"
         type="text"
@@ -155,22 +158,26 @@ export default function TakeForm({ requestId }) {
         mb="32px"
       /> */}
 
-      <InputField
-        id="location"
-        label="Select Location"
-        type="text"
-        readOnly
-        placeholder="Select Location on Map"
-        value={
-          selectedLocation
-            ? `${selectedLocation.latitude}, ${selectedLocation.longitude}`
-            : ""
-        }
-        setter={setSelectedLocation}
-        mt="8px"
-        mb="32px"
-      />
-      <Map onLocationSelect={handleLocationSelect} />
+        <InputField
+          id="location"
+          label="Select Location"
+          type="text"
+          readOnly
+          placeholder="Select Location on Map"
+          value={
+            selectedLocation
+              ? `${selectedLocation.latitude}, ${selectedLocation.longitude}`
+              : ""
+          }
+          setter={setSelectedLocation}
+          mt="8px"
+          mb="32px"
+        />
+      </div>
+
+      <div className="h-64 md:h-80">
+        <Map onLocationSelect={handleLocationSelect} />
+      </div>
       <button
         className="block m-auto my-9 btn-primary"
         type="submit"

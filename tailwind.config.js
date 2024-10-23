@@ -19,12 +19,12 @@ module.exports = {
       colors: {
         white: "#fffff3",
         // green: "#C75B7A",
-        green: "#789DBC",
-        red: "#D9ABAB",
+        green: "#6489A2",
+        red: "#B96464",
         deepBlue: "#35374B",
         skyblue: "#F0EBE3",
         bgwhite: "#F6F5F2",
-        violet: "#D9ABAB",
+        violet: "#B96464",
       },
       animation: {
         fadeIn: "fadeIn 2s ease-out",

@@ -37,11 +37,11 @@ export default async function TakeRequest({params}) {
         End <span className="text-red">Hunger</span>,{" "}
         <span className="text-green">Deliver</span> Meals
       </h1>
-      <div className="flex flex-col w-full lg:flex-row">
-        <div className="w-full lg:w-3/5 flex flex-col items-center">
+      <div className="flex flex-col w-full lg:flex-row-reverse mt-4 md:mt-8">
+        <div className="w-full lg:w-1/2 flex flex-col items-center">
           <GiveInfoCard title={"Give Request Details"} data={request} />
         </div>
-        <div className="w-full lg:w-2/5 flex flex-col items-center">
+        <div className="w-full lg:w-1/2 flex flex-col items-center">
           <TakeForm requestId={id} />
         </div>
       </div>

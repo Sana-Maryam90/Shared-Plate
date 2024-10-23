@@ -7,8 +7,6 @@ import { FaPeopleCarryBox } from "react-icons/fa6";
 import Logout from "@/app/components/Logout";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
-  const [categoriesOpen, setCategoriesOpen] = useState(false);
-  const [productsOpen, setProductsOpen] = useState(false);
 
   const closeSidebar = () => {
     setIsOpen(false);
@@ -20,7 +18,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   const linkClass = "w-full cursor-pointer";
   const flexClass =
-    "flex items-center px-4 py-6 rounded-lg transition-colors from-sky-800 to-violet hover:bg-gradient-to-br";
+    "flex items-center px-4 py-6 rounded-lg transition-colors from-deepBlue/80 to-violet hover:bg-gradient-to-br";
   const iconClass = "w-5 text-lg inline-block mr-4";
 
   return (

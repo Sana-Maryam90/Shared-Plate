@@ -64,7 +64,7 @@ const Logout = ({linkClass, flexClass, iconClass}) => {
               </button>
               <button
                 onClick={handleLogout}
-                className="btn-primary bg-red hover:bg-rose-950"
+                className="btn-primary bg-violet hover:bg-rose-950"
               >
                 Logout
               </button>

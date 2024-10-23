@@ -2,6 +2,7 @@
 import GoogleMap from './GoogleMap';
 import React, { useState, useEffect, useRef } from 'react';
 import Card from './Card';
+import Loader from '../account/components/Loader';
 
 const TakeComp = ({ fetchedData }) => {
   const requests = fetchedData;
@@ -75,7 +76,7 @@ const TakeComp = ({ fetchedData }) => {
 
 
   useEffect(() => {
-    if (fetchedData && fetchedData.length > 0) {
+    if (fetchedData || fetchedData.length > 0) {
       setFilteredRequests(fetchedData);
       setLoading(false); // Set loading state to false when data is fetched
     }
@@ -83,16 +84,23 @@ const TakeComp = ({ fetchedData }) => {
 
   return (
     <main className="font-notoSans 2xl:flex xl:flex lg:flex md:flex h-screen">
-      <div className='w-[100%] md:w-[60%] 2xl:w-[70%] xl:w-[70%] lg:w-[70%]'>
-        <GoogleMap requests={filteredRequests} userLocation={userLocation} onMarkerClick={handleMarkerClick}/>
+      <div className="w-[100%] md:w-[60%] 2xl:w-[70%] xl:w-[70%] lg:w-[70%]">
+        <GoogleMap
+          requests={filteredRequests}
+          userLocation={userLocation}
+          onMarkerClick={handleMarkerClick}
+        />
       </div>
 
-      <div className='flex flex-col bg-bgwhite items-center w-[100%] md:w-[40%] 2xl:w-[30%] xl:w-[30%] lg:w-[30%] overflow-y-auto'>
-      {loading ? (
-          <div>Loading...</div>
-        ) : (
-          filteredRequests.map(request => (
-            <div key={request._id} ref={(el) => (cardRefs.current[request._id] = el)} className='w-full flex justify-center items-center'>
+      <div className="flex flex-col bg-bgwhite items-center w-[100%] md:w-[40%] 2xl:w-[30%] xl:w-[30%] lg:w-[30%] overflow-y-auto">
+        {fetchedData.length > 0 &&
+          !loading &&
+          filteredRequests.map((request) => (
+            <div
+              key={request._id}
+              ref={(el) => (cardRefs.current[request._id] = el)}
+              className="w-full flex justify-center items-center"
+            >
               <Card
                 key={request._id}
                 name={request.name}
@@ -102,10 +110,13 @@ const TakeComp = ({ fetchedData }) => {
                 id={request._id}
               />
             </div>
-          ))
+          ))}
+        {loading && <Loader />}
+        {fetchedData.length === 0 && !loading && (
+          <div className='w-full h-full flex justify-center items-center'><p>Currently, there are no open give requests fro you</p></div>
         )}
-      </div>  
-    </main>    
+      </div>
+    </main>
   );
 };
 
