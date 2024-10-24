@@ -227,7 +227,9 @@ export default function GiveForm() {
           type="datetime-local"
           placeholder="Food is available uptil this time from now"
           value={formData.availability}
-          setter={(value) => handleInputChange("availability", formattedTime(value))}
+          setter={(value) =>
+            handleInputChange("availability", formattedTime(value))
+          }
           mt="8px"
           mb="32px"
         />
@@ -284,7 +286,9 @@ export default function GiveForm() {
         />
       </div>
       {/* new */}
-      <Map onLocationSelect={handleLocationSelect} />
+      <div className="h-64 md:h-80">
+        <Map onLocationSelect={handleLocationSelect} />
+      </div>
       <button
         className="block m-auto my-9 btn-primary"
         type="submit"

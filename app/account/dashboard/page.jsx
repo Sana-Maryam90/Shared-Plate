@@ -131,7 +131,7 @@ const Dashboard = () => {
         {/* Pie Chart */}
         <div className="bg-skyblue/75 border border-deepBlue/35  p-4 rounded-lg shadow-lg">
           <h3 className="text-xl font-semibold mb-4">Requests Breakdown</h3>
-          <Pie data={pieData} style={{height: "300px"}} />
+          <Pie data={pieData} />
         </div>
       </div>
     </div>
