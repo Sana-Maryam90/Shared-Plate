@@ -43,12 +43,12 @@ To run Shared Plate on your local machine, follow these steps:
 
 1. **Clone the Repository**:
 ```bash
-git clone https://github.com/your_username/shared-plate.git
+git clone https://github.com/Sana-Maryam90/Shared-Plate.git
 ```
 
 3. **Navigate to the Project Directory**:
 ```bash
-cd shared-plate
+cd Shared-Plate
 ```
 
 3. **Install Dependencies**:
