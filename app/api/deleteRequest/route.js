@@ -10,7 +10,8 @@ export async function POST(request) {
         const currentTime = new Date();
 
         // Fetch all giveRequests
-        const allRequests = await GiveRequest.find({});
+        const allRequests = await GiveRequest.find({ status: "open" });
+
 
         // Filter giveRequests that have availability time less than current time
         const overdueRequests = allRequests.filter(request => {
